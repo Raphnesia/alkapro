@@ -64,7 +64,7 @@ npm install
 cp env.example .env.local
 
 # Edit .env.local dengan URL backend Anda
-NEXT_PUBLIC_API_BASE_URL=https://api.raphnesia.my.id/api
+NEXT_PUBLIC_API_BASE_URL=https://api.alkapro.id/api
 NEXT_PUBLIC_USE_PROXY=true
 
 # Jalankan development server
@@ -127,7 +127,7 @@ Buka `http://localhost:3000/test-connection` untuk memverifikasi koneksi antara 
 ## 📊 Testing Checklist
 
 ### ✅ Backend Testing
-- [ ] Laravel server berjalan di `api.raphnesia.my.id`
+- [ ] Laravel server berjalan di `api.alkapro.id`
 - [ ] Database migrations berhasil
 - [ ] Filament admin accessible di `/admin`
 - [ ] API endpoints responsive
@@ -156,7 +156,7 @@ Buka `http://localhost:3000/test-connection` untuk memverifikasi koneksi antara 
 5. Jalankan `php artisan migrate`
 6. Setup cron jobs untuk Laravel scheduler
 
-### Next.js Frontend (Vercel) - Domain: raphnesia.my.id
+### Next.js Frontend (Vercel) - Domain: alkapro.id
 
 #### 1. Setup Domain di Vercel
 ```bash
@@ -169,28 +169,28 @@ git push origin main
 
 #### 2. Environment Variables di Vercel
 ```bash
-NEXT_PUBLIC_API_BASE_URL=https://api.raphnesia.my.id/api
+NEXT_PUBLIC_API_BASE_URL=https://api.alkapro.id/api
 NEXT_PUBLIC_USE_PROXY=true
-NEXT_PUBLIC_SITE_URL=https://raphnesia.my.id
+NEXT_PUBLIC_SITE_URL=https://alkapro.id
 ```
 
 #### 3. Domain Configuration
-- **Frontend**: `raphnesia.my.id` (Vercel)
-- **API**: `api.raphnesia.my.id` (Hosting)
+- **Frontend**: `alkapro.id` (Vercel)
+- **API**: `api.alkapro.id` (Hosting)
 - **CORS Proxy**: `/api/proxy` (Next.js)
 
 #### 4. DNS Records
 ```
-A Record: raphnesia.my.id → Vercel IP
-CNAME: www.raphnesia.my.id → raphnesia.my.id
-A Record: api.raphnesia.my.id → Hosting IP
+A Record: alkapro.id → Vercel IP
+CNAME: www.alkapro.id → alkapro.id
+A Record: api.alkapro.id → Hosting IP
 ```
 
 #### 5. CORS Proxy Setup
 Semua API calls akan melalui `/api/proxy` untuk menghindari CORS issues:
 ```typescript
 // ❌ Sebelum (bisa error CORS)
-fetch('https://api.raphnesia.my.id/api/v1/navigation/header')
+fetch('https://api.alkapro.id/api/v1/navigation/header')
 
 // ✅ Sesudah (aman dari CORS)
 fetch('/api/proxy/v1/navigation/header')
