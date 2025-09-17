@@ -26,14 +26,14 @@ Buat file `.env.local` di root project dengan konfigurasi berikut:
 
 ```env
 # API Configuration
-NEXT_PUBLIC_API_BASE_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_BASE_URL=http://api.alkapro.id/api/v1
 
 # Site Configuration
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 ### 2. API Endpoints
-Pastikan backend API berjalan di `http://api.raphnesia.my.id` dengan endpoint berikut:
+Pastikan backend API berjalan di `http://api.alkapro.id` dengan endpoint berikut:
 
 - `GET /api/v1/pimpinan-smp/complete` - Semua data lengkap
 - `GET /api/v1/pimpinan-smp` - Semua pimpinan

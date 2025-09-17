@@ -1,5 +1,5 @@
 // Base URL untuk API
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.raphnesia.my.id/api/v1';
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.alkapro.id/api/v1';
 // Origin tanpa suffix /api (/api/v1)
 const API_ORIGIN = API_BASE.replace(/\/(api)(?:\/v\d+)?\/?$/i, '');
 

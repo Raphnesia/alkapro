@@ -31,7 +31,7 @@ const BeritaList = () => {
   const buildImageUrl = (path: string): string => {
     if (!path) return '/image112.png'
     if (/^https?:\/\//i.test(path)) return path
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://api.raphnesia.my.id/api'
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://api.alkapro.id/api'
     const backendOrigin = apiBase.replace(/\/?api(?:\/v\d+)?$/i, '')
     const normalized = path.startsWith('/storage') ? path : `/storage/${path.replace(/^\/+/, '')}`
     return `${backendOrigin}${normalized}`

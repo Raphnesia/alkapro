@@ -155,7 +155,7 @@ const ICTDetail = () => {
   }
 
   // Helper URL gambar backend
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id/api'
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id/api'
   const backendOrigin = (() => {
     try {
       const url = new URL(apiBase)

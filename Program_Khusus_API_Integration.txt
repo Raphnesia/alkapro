@@ -18,7 +18,7 @@ API untuk mengelola data Program Khusus sekolah yang mencakup program ICT dan Ta
 
 ## 🔗 Base URL
 ```
-http://api.raphnesia.my.id/api/v1/program-khusus
+http://api.alkapro.id/api/v1/program-khusus
 ```
 
 ---
@@ -621,7 +621,7 @@ GET /program-khusus/programs/1
 // Mengambil semua data Program Khusus
 const fetchProgramKhusus = async () => {
   try {
-    const response = await fetch('http://api.raphnesia.my.id/api/v1/program-khusus');
+    const response = await fetch('http://api.alkapro.id/api/v1/program-khusus');
     const data = await response.json();
     
     if (data.success) {
@@ -640,7 +640,7 @@ const fetchProgramKhusus = async () => {
 // Mengambil data program ICT saja
 const fetchICTPrograms = async () => {
   try {
-    const response = await fetch('http://api.raphnesia.my.id/api/v1/program-khusus/ict');
+    const response = await fetch('http://api.alkapro.id/api/v1/program-khusus/ict');
     const data = await response.json();
     
     if (data.success) {
@@ -655,7 +655,7 @@ const fetchICTPrograms = async () => {
 // Mengambil detail program tertentu
 const fetchProgramDetail = async (programId) => {
   try {
-    const response = await fetch(`http://api.raphnesia.my.id/api/v1/program-khusus/programs/${programId}`);
+    const response = await fetch(`http://api.alkapro.id/api/v1/program-khusus/programs/${programId}`);
     const data = await response.json();
     
     if (data.success) {
@@ -677,7 +677,7 @@ use GuzzleHttp\Client;
 $client = new Client();
 
 // Mengambil semua data Program Khusus
-$response = $client->get('http://api.raphnesia.my.id/api/v1/program-khusus');
+$response = $client->get('http://api.alkapro.id/api/v1/program-khusus');
 $data = json_decode($response->getBody(), true);
 
 if ($data['success']) {
@@ -699,7 +699,7 @@ Saat ini API bersifat **public** dan tidak memerlukan autentikasi. Semua endpoin
 
 ## 📝 Notes
 
-1. **Image URLs**: Semua URL gambar menggunakan path relatif. Untuk akses penuh, tambahkan base URL: `http://api.raphnesia.my.id/storage/`
+1. **Image URLs**: Semua URL gambar menggunakan path relatif. Untuk akses penuh, tambahkan base URL: `http://api.alkapro.id/storage/`
 
 2. **Formatted Fields**: Model menyediakan accessor untuk format yang user-friendly:
    - `formatted_price`: Format harga dalam Rupiah
@@ -719,11 +719,11 @@ Untuk testing API, Anda dapat menggunakan:
 
 ```bash
 # Test semua endpoints
-curl -X GET "http://api.raphnesia.my.id/api/v1/program-khusus"
-curl -X GET "http://api.raphnesia.my.id/api/v1/program-khusus/ict"
-curl -X GET "http://api.raphnesia.my.id/api/v1/program-khusus/tahfidz"
-curl -X GET "http://api.raphnesia.my.id/api/v1/program-khusus/type/ict"
-curl -X GET "http://api.raphnesia.my.id/api/v1/program-khusus/programs/1"
+curl -X GET "http://api.alkapro.id/api/v1/program-khusus"
+curl -X GET "http://api.alkapro.id/api/v1/program-khusus/ict"
+curl -X GET "http://api.alkapro.id/api/v1/program-khusus/tahfidz"
+curl -X GET "http://api.alkapro.id/api/v1/program-khusus/type/ict"
+curl -X GET "http://api.alkapro.id/api/v1/program-khusus/programs/1"
 ```
 
 Atau menggunakan tools seperti **Postman**, **Insomnia**, atau **Thunder Client** di VS Code.

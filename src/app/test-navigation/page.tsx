@@ -191,7 +191,7 @@ export default function TestNavigationPage() {
       <div className="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
         <h2 className="text-xl font-semibold mb-4 text-blue-800">Cara Penggunaan</h2>
         <div className="space-y-2 text-blue-700">
-          <p>1. Pastikan backend server berjalan di <code className="bg-blue-100 px-1 rounded">http://api.raphnesia.my.id</code></p>
+          <p>1. Pastikan backend server berjalan di <code className="bg-blue-100 px-1 rounded">http://api.alkapro.id</code></p>
           <p>2. Pastikan endpoint <code className="bg-blue-100 px-1 rounded">/api/v1/navigation/header</code> dan <code className="bg-blue-100 px-1 rounded">/api/v1/navigation/footer</code> tersedia</p>
           <p>3. Jika API tidak tersedia, component akan menggunakan fallback data statis</p>
           <p>4. Gunakan halaman ini untuk debugging dan testing Navigation API</p>

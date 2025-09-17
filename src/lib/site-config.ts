@@ -38,8 +38,8 @@ export const siteConfig = {
 
   // API Configuration
   api: {
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || "http://api.raphnesia.my.id/api",
-    imageBaseUrl: process.env.NEXT_PUBLIC_IMAGE_BASE_URL || "http://api.raphnesia.my.id/storage",
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || "http://api.alkapro.id/api",
+    imageBaseUrl: process.env.NEXT_PUBLIC_IMAGE_BASE_URL || "http://api.alkapro.id/storage",
   },
 
   // Layout Sections

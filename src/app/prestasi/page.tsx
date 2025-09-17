@@ -71,7 +71,7 @@ export default function PrestasiPage() {
       
       try {
         // Fetch prestasi
-        const prestasiResponse = await fetch('https://api.raphnesia.my.id/api/v1/news?tags=prestasi')
+        const prestasiResponse = await fetch('https://api.alkapro.id/api/v1/news?tags=prestasi')
         if (prestasiResponse.ok) {
           const prestasiData = await prestasiResponse.json()
           if (prestasiData?.data?.length > 0) {
@@ -97,8 +97,8 @@ export default function PrestasiPage() {
         let tahfidzResponse = null
         
         // Coba URL 1: ujian tahfidz
-        tahfidzResponse = await fetch('https://api.raphnesia.my.id/api/v1/news?tags=ujian%20tahfidz')
-        console.log('🔍 Tahfidz API URL 1:', 'https://api.raphnesia.my.id/api/v1/news?tags=ujian%20tahfidz')
+        tahfidzResponse = await fetch('https://api.alkapro.id/api/v1/news?tags=ujian%20tahfidz')
+        console.log('🔍 Tahfidz API URL 1:', 'https://api.alkapro.id/api/v1/news?tags=ujian%20tahfidz')
         console.log('🔍 Tahfidz Response 1 Status:', tahfidzResponse.status)
         
         if (tahfidzResponse.ok) {
@@ -109,8 +109,8 @@ export default function PrestasiPage() {
         
         // Jika URL 1 tidak ada data, coba URL 2: tahfidz
         if (!tahfidzData?.data?.length) {
-          tahfidzResponse = await fetch('https://api.raphnesia.my.id/api/v1/news?tags=tahfidz')
-          console.log('🔍 Tahfidz API URL 2:', 'https://api.raphnesia.my.id/api/v1/news?tags=tahfidz')
+          tahfidzResponse = await fetch('https://api.alkapro.id/api/v1/news?tags=tahfidz')
+          console.log('🔍 Tahfidz API URL 2:', 'https://api.alkapro.id/api/v1/news?tags=tahfidz')
           console.log('🔍 Tahfidz Response 2 Status:', tahfidzResponse.status)
           
           if (tahfidzResponse.ok) {
@@ -122,8 +122,8 @@ export default function PrestasiPage() {
         
         // Jika URL 2 tidak ada data, coba URL 3: ujian
         if (!tahfidzData?.data?.length) {
-          tahfidzResponse = await fetch('https://api.raphnesia.my.id/api/v1/news?tags=ujian')
-          console.log('🔍 Tahfidz API URL 3:', 'https://api.raphnesia.my.id/api/v1/news?tags=ujian')
+          tahfidzResponse = await fetch('https://api.alkapro.id/api/v1/news?tags=ujian')
+          console.log('🔍 Tahfidz API URL 3:', 'https://api.alkapro.id/api/v1/news?tags=ujian')
           console.log('🔍 Tahfidz Response 3 Status:', tahfidzResponse.status)
           
           if (tahfidzResponse.ok) {

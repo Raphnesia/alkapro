@@ -2,7 +2,7 @@
 
 ## Base URL
 ```
-http://api.raphnesia.my.id/api/v1
+http://api.alkapro.id/api/v1
 ```
 
 ## Endpoints
@@ -35,7 +35,7 @@ GET /special-programs
         "Bimbingan ustadz berpengalaman",
         "Target hafalan yang terstruktur"
       ],
-      "image": "http://api.raphnesia.my.id/storage/special-programs/thumb.jpg",
+      "image": "http://api.alkapro.id/storage/special-programs/thumb.jpg",
       "order_index": 1,
       "is_active": true
     }
@@ -58,7 +58,7 @@ GET /special-programs/tahfidz-intensif
     "description": "<p>Program tahfidz ...</p>",
     "content_type": "rich",
     "grid_items": [],
-    "image": "http://api.raphnesia.my.id/storage/special-programs/thumb.jpg",
+    "image": "http://api.alkapro.id/storage/special-programs/thumb.jpg",
     "order_index": 1,
     "is_active": true
   }
@@ -76,8 +76,8 @@ GET /special-programs/settings
     "id": 1,
     "title": "Program Khusus",
     "subtitle": "Tahfidz & ICT",
-    "banner_desktop": "http://api.raphnesia.my.id/storage/program-khusus/banners/desktop.jpg",
-    "banner_mobile": "http://api.raphnesia.my.id/storage/program-khusus/banners/mobile.jpg"
+    "banner_desktop": "http://api.alkapro.id/storage/program-khusus/banners/desktop.jpg",
+    "banner_mobile": "http://api.alkapro.id/storage/program-khusus/banners/mobile.jpg"
   }
 }
 ```
@@ -94,14 +94,14 @@ GET /special-programs/type/tahfidz/settings
     "type": "tahfidz",
     "title": "Program Tahfidz Al-Quran",
     "subtitle": "Hafalan Al-Quran dengan metode yang terstruktur",
-    "banner_desktop": "http://api.raphnesia.my.id/storage/program-khusus/banners/tahfidz-desktop.jpg",
-    "banner_mobile": "http://api.raphnesia.my.id/storage/program-khusus/banners/tahfidz-mobile.jpg",
-    "hero_desktop_image": "http://api.raphnesia.my.id/storage/program-khusus/hero/tahfidz-hero-desktop.jpg",
-    "hero_mobile_image": "http://api.raphnesia.my.id/storage/program-khusus/hero/tahfidz-hero-mobile.jpg",
+    "banner_desktop": "http://api.alkapro.id/storage/program-khusus/banners/tahfidz-desktop.jpg",
+    "banner_mobile": "http://api.alkapro.id/storage/program-khusus/banners/tahfidz-mobile.jpg",
+    "hero_desktop_image": "http://api.alkapro.id/storage/program-khusus/hero/tahfidz-hero-desktop.jpg",
+    "hero_mobile_image": "http://api.alkapro.id/storage/program-khusus/hero/tahfidz-hero-mobile.jpg",
     "intro_badge_text": "Program Unggulan",
     "intro_main_title": "Tahfidz Al-Quran Terpadu",
     "intro_description": "Program hafalan Al-Quran dengan metode pembelajaran yang terbukti efektif dan bimbingan ustadz berpengalaman.",
-    "featured_image": "http://api.raphnesia.my.id/storage/program-khusus/featured/tahfidz-featured.jpg",
+    "featured_image": "http://api.alkapro.id/storage/program-khusus/featured/tahfidz-featured.jpg",
     "featured_image_title": "Lingkungan Belajar Kondusif",
     "featured_image_description": "Fasilitas modern dan suasana Islami yang mendukung proses hafalan Al-Quran.",
     "key_points": [
@@ -139,9 +139,9 @@ GET /special-programs/type/tahfidz/settings
       }
     ],
     "gallery_images": [
-      "http://api.raphnesia.my.id/storage/program-khusus/gallery/tahfidz-1.jpg",
-      "http://api.raphnesia.my.id/storage/program-khusus/gallery/tahfidz-2.jpg",
-      "http://api.raphnesia.my.id/storage/program-khusus/gallery/tahfidz-3.jpg"
+      "http://api.alkapro.id/storage/program-khusus/gallery/tahfidz-1.jpg",
+      "http://api.alkapro.id/storage/program-khusus/gallery/tahfidz-2.jpg",
+      "http://api.alkapro.id/storage/program-khusus/gallery/tahfidz-3.jpg"
     ],
     "cta_title": "Bergabung dengan Program Tahfidz",
     "cta_subtitle": "Wujudkan impian menjadi hafidz Al-Quran bersama kami",
@@ -164,8 +164,8 @@ GET /special-programs/complete
       "id": 1,
       "title": "Program Khusus",
       "subtitle": "Tahfidz & ICT",
-      "banner_desktop": "http://api.raphnesia.my.id/storage/program-khusus/banners/desktop.jpg",
-      "banner_mobile": "http://api.raphnesia.my.id/storage/program-khusus/banners/mobile.jpg"
+      "banner_desktop": "http://api.alkapro.id/storage/program-khusus/banners/desktop.jpg",
+      "banner_mobile": "http://api.alkapro.id/storage/program-khusus/banners/mobile.jpg"
     },
     "items": [
       {
@@ -198,14 +198,14 @@ GET /special-programs/type/ict/complete
       "type": "ict",
       "title": "Program ICT Terpadu",
       "subtitle": "Information and Communication Technology untuk masa depan digital",
-      "banner_desktop": "http://api.raphnesia.my.id/storage/program-khusus/banners/ict-desktop.jpg",
-      "banner_mobile": "http://api.raphnesia.my.id/storage/program-khusus/banners/ict-mobile.jpg",
-      "hero_desktop_image": "http://api.raphnesia.my.id/storage/program-khusus/hero/ict-hero-desktop.jpg",
-      "hero_mobile_image": "http://api.raphnesia.my.id/storage/program-khusus/hero/ict-hero-mobile.jpg",
+      "banner_desktop": "http://api.alkapro.id/storage/program-khusus/banners/ict-desktop.jpg",
+      "banner_mobile": "http://api.alkapro.id/storage/program-khusus/banners/ict-mobile.jpg",
+      "hero_desktop_image": "http://api.alkapro.id/storage/program-khusus/hero/ict-hero-desktop.jpg",
+      "hero_mobile_image": "http://api.alkapro.id/storage/program-khusus/hero/ict-hero-mobile.jpg",
       "intro_badge_text": "Program Unggulan",
       "intro_main_title": "ICT & Digital Skills",
       "intro_description": "Program pembelajaran teknologi informasi dan komunikasi yang mempersiapkan siswa untuk era digital.",
-      "featured_image": "http://api.raphnesia.my.id/storage/program-khusus/featured/ict-featured.jpg",
+      "featured_image": "http://api.alkapro.id/storage/program-khusus/featured/ict-featured.jpg",
       "featured_image_title": "Lab Komputer Modern",
       "featured_image_description": "Fasilitas laboratorium komputer dengan perangkat terkini untuk mendukung pembelajaran ICT.",
       "key_points": [
@@ -243,9 +243,9 @@ GET /special-programs/type/ict/complete
         }
       ],
       "gallery_images": [
-        "http://api.raphnesia.my.id/storage/program-khusus/gallery/ict-1.jpg",
-        "http://api.raphnesia.my.id/storage/program-khusus/gallery/ict-2.jpg",
-        "http://api.raphnesia.my.id/storage/program-khusus/gallery/ict-3.jpg"
+        "http://api.alkapro.id/storage/program-khusus/gallery/ict-1.jpg",
+        "http://api.alkapro.id/storage/program-khusus/gallery/ict-2.jpg",
+        "http://api.alkapro.id/storage/program-khusus/gallery/ict-3.jpg"
       ],
       "cta_title": "Bergabung dengan Program ICT",
       "cta_subtitle": "Siapkan diri untuk masa depan digital bersama kami",
@@ -271,7 +271,7 @@ GET /special-programs/type/ict/complete
           "Kompetisi robotika dan programming",
           "Magang di perusahaan teknologi"
         ],
-        "image": "http://api.raphnesia.my.id/storage/special-programs/ict-program.jpg",
+        "image": "http://api.alkapro.id/storage/special-programs/ict-program.jpg",
         "order_index": 2,
         "is_active": true
       }

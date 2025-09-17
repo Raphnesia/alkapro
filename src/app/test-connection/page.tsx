@@ -231,7 +231,7 @@ export default function TestConnectionPage() {
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <h3 className="text-lg font-semibold text-blue-900 mb-2">Cara Menggunakan</h3>
           <div className="text-sm text-blue-800 space-y-2">
-            <p><strong>1. Backend Laravel:</strong> Pastikan Laravel backend sudah berjalan di <code className="bg-blue-100 px-2 py-1 rounded">http://api.raphnesia.my.id</code></p>
+            <p><strong>1. Backend Laravel:</strong> Pastikan Laravel backend sudah berjalan di <code className="bg-blue-100 px-2 py-1 rounded">http://api.alkapro.id</code></p>
             <p><strong>2. Frontend Next.js:</strong> Jalankan Next.js dengan perintah: <code className="bg-blue-100 px-2 py-1 rounded">npm run dev</code></p>
             <p><strong>3. Environment:</strong> Pastikan file <code className="bg-blue-100 px-2 py-1 rounded">.env.local</code> sudah dikonfigurasi dengan benar</p>
             <p><strong>4. Database:</strong> Pastikan database sudah di-migrate dan ada data</p>

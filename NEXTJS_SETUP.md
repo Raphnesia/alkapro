@@ -8,13 +8,13 @@ Update file `.env.local` dengan konfigurasi berikut:
 
 ```bash
 # Laravel Backend API Configuration
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api
 
 # Production (ganti dengan domain shared hosting Anda)
 # NEXT_PUBLIC_API_URL=https://your-shared-hosting-domain.com/api
 
 # Image Configuration
-NEXT_PUBLIC_IMAGE_BASE_URL=http://api.raphnesia.my.id/storage
+NEXT_PUBLIC_IMAGE_BASE_URL=http://api.alkapro.id/storage
 
 # Site Information
 NEXT_PUBLIC_SITE_NAME="Sekolah Islam Terpadu"

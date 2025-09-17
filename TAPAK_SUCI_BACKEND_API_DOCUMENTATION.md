@@ -5,7 +5,7 @@ Dokumentasi ini menjelaskan API endpoints yang diperlukan untuk mendukung halama
 
 ## Base URL
 ```
-https://api.raphnesia.my.id/api/v1
+https://api.alkapro.id/api/v1
 ```
 
 ## Required API Endpoints
@@ -680,15 +680,15 @@ Gunakan tools seperti Postman atau curl untuk testing:
 
 ```bash
 # Test complete endpoint
-curl -X GET "https://api.raphnesia.my.id/api/v1/tapak-suci/complete" \
+curl -X GET "https://api.alkapro.id/api/v1/tapak-suci/complete" \
   -H "Accept: application/json"
 
 # Test pengurus endpoint
-curl -X GET "https://api.raphnesia.my.id/api/v1/tapak-suci" \
+curl -X GET "https://api.alkapro.id/api/v1/tapak-suci" \
   -H "Accept: application/json"
 
 # Test content endpoint
-curl -X GET "https://api.raphnesia.my.id/api/tapak-suci-content" \
+curl -X GET "https://api.alkapro.id/api/tapak-suci-content" \
   -H "Accept: application/json"
 ```
 

@@ -338,7 +338,7 @@ export function Header() {
                   href="/info-ppdb"
                   className="bg-white text-primary px-4 py-2 text-sm font-bold hover:bg-opacity-90 transition-colors rounded-sm shadow-sm flex items-center gap-2"
                 >
-                  <span>Info PPDB</span>
+                  <span>Info PSB 25/26</span>
                 </a>
               </div>
 

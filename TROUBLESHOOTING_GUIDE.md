@@ -23,7 +23,7 @@ Di Developer Tools → Network tab:
 ### 3. **Cek Environment Variables**
 Pastikan file `.env.local` sudah dibuat:
 ```env
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1
 ```
 
 ## ✅ **Solusi Step by Step**
@@ -32,13 +32,13 @@ NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
 ```bash
 # Di folder backend Laravel
 php artisan serve
-# Pastikan berjalan di http://api.raphnesia.my.id
+# Pastikan berjalan di http://api.alkapro.id
 ```
 
 ### **Step 2: Test API Endpoint**
 ```bash
 # Test dengan curl atau browser
-curl http://api.raphnesia.my.id/api/v1/teachers/by-subject
+curl http://api.alkapro.id/api/v1/teachers/by-subject
 ```
 
 ### **Step 3: Cek CORS Configuration**
@@ -88,7 +88,7 @@ Fallback otomatis aktif jika:
 ### **Test API Connection**
 ```javascript
 // Di browser console
-fetch('http://api.raphnesia.my.id/api/v1/teachers/by-subject')
+fetch('http://api.alkapro.id/api/v1/teachers/by-subject')
   .then(res => res.json())
   .then(data => console.log(data))
   .catch(err => console.error('API Error:', err))
@@ -132,13 +132,13 @@ npm run dev
 ```javascript
 // Di browser console
 console.log(process.env.NEXT_PUBLIC_API_URL)
-// Should show: http://api.raphnesia.my.id/api/v1
+// Should show: http://api.alkapro.id/api/v1
 ```
 
 ### **Fix 4: Test API Manually**
 ```bash
 # Test dengan curl
-curl -X GET http://api.raphnesia.my.id/api/v1/teachers/by-subject \
+curl -X GET http://api.alkapro.id/api/v1/teachers/by-subject \
   -H "Accept: application/json" \
   -H "Content-Type: application/json"
 ```
@@ -165,7 +165,7 @@ curl -X GET http://api.raphnesia.my.id/api/v1/teachers/by-subject \
 NEXT_PUBLIC_API_URL=https://your-backend-domain.com/api/v1
 
 # Development
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1
 ```
 
 ### **CORS Configuration**

@@ -2,7 +2,7 @@
 const RAW_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL;
 const API_BASE = (() => {
   // Default dev backend
-  const defaultBase = 'https://api.raphnesia.my.id/api';
+  const defaultBase = 'https://api.alkapro.id/api';
 
   // Helper: strip any trailing /api or /api/v{n}
   const stripApiSuffix = (base: string) => base.replace(/\/(api)(?:\/v\d+)?\/?$/i, '');

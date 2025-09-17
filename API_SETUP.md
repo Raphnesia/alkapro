@@ -6,7 +6,7 @@ Buat file `.env.local` di root project dengan konfigurasi berikut:
 
 ```env
 # API Configuration
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1
 
 # Instagram API Configuration (if needed)
 NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN=your_instagram_access_token_here
@@ -19,7 +19,7 @@ NEXT_PUBLIC_TIKTOK_USER_ID=your_tiktok_user_id_here
 
 ## Backend Requirements
 
-Pastikan backend Laravel Anda sudah berjalan di `http://api.raphnesia.my.id` dengan endpoint:
+Pastikan backend Laravel Anda sudah berjalan di `http://api.alkapro.id` dengan endpoint:
 
 - `GET /api/v1/teachers/by-subject` - Mengambil data guru dikelompokkan berdasarkan mata pelajaran
 - `GET /api/v1/teachers` - Mengambil semua data guru & staff
@@ -53,7 +53,7 @@ Backend harus mengembalikan data dalam format:
     "matematika": [
       {
         "name": "Dr. Ahmad Susanto, M.Pd.",
-        "image": "http://api.raphnesia.my.id/storage/teachers/ahmad.jpg",
+        "image": "http://api.alkapro.id/storage/teachers/ahmad.jpg",
         "position": "Guru Matematika Senior",
         "description": "Berpengalaman 15 tahun dalam pengajaran matematika",
         "subject": "Matematika"
@@ -62,7 +62,7 @@ Backend harus mengembalikan data dalam format:
     "bahasa_indonesia": [
       {
         "name": "Prof. Bambang Sutrisno, M.Pd.",
-        "image": "http://api.raphnesia.my.id/storage/teachers/bambang.jpg",
+        "image": "http://api.alkapro.id/storage/teachers/bambang.jpg",
         "position": "Guru Bahasa Indonesia Senior",
         "description": "Ahli dalam sastra Indonesia",
         "subject": "Bahasa Indonesia"

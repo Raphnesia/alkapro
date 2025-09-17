@@ -10,7 +10,7 @@ cp .env.example .env.local
 
 Edit `.env.local`:
 ```env
-NEXT_PUBLIC_API_BASE_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_BASE_URL=http://api.alkapro.id/api/v1
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
@@ -35,13 +35,13 @@ php artisan serve --port=8000
 ### 1. Test API Endpoints
 ```bash
 # Test complete data
-curl http://api.raphnesia.my.id/api/v1/pimpinan-smp/complete
+curl http://api.alkapro.id/api/v1/pimpinan-smp/complete
 
 # Test settings
-curl http://api.raphnesia.my.id/api/v1/pimpinan-smp/settings
+curl http://api.alkapro.id/api/v1/pimpinan-smp/settings
 
 # Test pimpinan data
-curl http://api.raphnesia.my.id/api/v1/pimpinan-smp
+curl http://api.alkapro.id/api/v1/pimpinan-smp
 ```
 
 ### 2. Test Frontend
@@ -54,7 +54,7 @@ curl http://api.raphnesia.my.id/api/v1/pimpinan-smp
 ### API Tidak Terhubung
 ```bash
 # Cek apakah backend berjalan
-curl http://api.raphnesia.my.id/api/v1/pimpinan-smp/complete
+curl http://api.alkapro.id/api/v1/pimpinan-smp/complete
 
 # Jika error, restart backend
 php artisan serve --port=8000
@@ -96,7 +96,7 @@ src/
 ## Admin Panel Setup
 
 ### 1. Akses Admin Panel
-- URL: http://api.raphnesia.my.id/admin
+- URL: http://api.alkapro.id/admin
 - Login dengan credentials yang sudah dibuat
 
 ### 2. Kelola Data

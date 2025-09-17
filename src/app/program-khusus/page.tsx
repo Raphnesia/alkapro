@@ -104,7 +104,7 @@ const ProgramKhususPage = () => {
   }, [])
 
   // Helper untuk membangun URL gambar dari backend tanpa mengubah layout
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id/api'
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id/api'
   // Dapatkan origin murni (protocol + host + optional port) dari API base apapun bentuknya
   const backendOrigin = (() => {
     try {

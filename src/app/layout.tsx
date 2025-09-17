@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         {/* Preconnect ke backend API untuk kurangi DNS+TLS handshake */}
-        <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id'} />
+        <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id'} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}

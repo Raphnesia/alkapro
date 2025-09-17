@@ -10,10 +10,10 @@ Frontend menggunakan endpoint baru `/api/teachers` tapi backend masih menggunaka
 ### **1. Updated API Base URL**
 ```typescript
 // Dari
-const API_BASE_URL = 'http://api.raphnesia.my.id/api'
+const API_BASE_URL = 'http://api.alkapro.id/api'
 
 // Ke
-const API_BASE_URL = 'http://api.raphnesia.my.id/api/v1'
+const API_BASE_URL = 'http://api.alkapro.id/api/v1'
 ```
 
 ### **2. Fixed Endpoint Paths**
@@ -77,7 +77,7 @@ export const getTeacherSettings = async (): Promise<TeacherSettings> => {
 
 ### **1. Get Teachers Grouped by Subject** ⭐
 ```bash
-GET http://api.raphnesia.my.id/api/v1/teachers/by-subject
+GET http://api.alkapro.id/api/v1/teachers/by-subject
 ```
 
 **Response:**
@@ -87,7 +87,7 @@ GET http://api.raphnesia.my.id/api/v1/teachers/by-subject
     "matematika": [
       {
         "name": "Dr. Ahmad Susanto, M.Pd.",
-        "image": "http://api.raphnesia.my.id/storage/teachers/ahmad.jpg",
+        "image": "http://api.alkapro.id/storage/teachers/ahmad.jpg",
         "position": "Guru Matematika Senior",
         "description": "Berpengalaman 15 tahun dalam pengajaran matematika",
         "subject": "Matematika"
@@ -96,7 +96,7 @@ GET http://api.raphnesia.my.id/api/v1/teachers/by-subject
     "bahasa_inggris": [
       {
         "name": "Sarah Johnson, M.A.",
-        "image": "http://api.raphnesia.my.id/storage/teachers/sarah.jpg",
+        "image": "http://api.alkapro.id/storage/teachers/sarah.jpg",
         "position": "Guru Bahasa Inggris",
         "description": "Lulusan dari University of Cambridge",
         "subject": "Bahasa Inggris"
@@ -108,23 +108,23 @@ GET http://api.raphnesia.my.id/api/v1/teachers/by-subject
 
 ### **2. Get All Teachers & Staff**
 ```bash
-GET http://api.raphnesia.my.id/api/v1/teachers
+GET http://api.alkapro.id/api/v1/teachers
 ```
 
 ### **3. Get Teachers Only**
 ```bash
-GET http://api.raphnesia.my.id/api/v1/teachers/list
+GET http://api.alkapro.id/api/v1/teachers/list
 ```
 
 ### **4. Get Staff Only**
 ```bash
-GET http://api.raphnesia.my.id/api/v1/staff/list
+GET http://api.alkapro.id/api/v1/staff/list
 ```
 
 ## 🔍 **Testing Checklist**
 
 ### **Backend Testing**
-- [ ] Backend server berjalan di `http://api.raphnesia.my.id`
+- [ ] Backend server berjalan di `http://api.alkapro.id`
 - [ ] Endpoint `/api/v1/teachers/by-subject` berfungsi
 - [ ] Response format sesuai dokumentasi
 - [ ] CORS dikonfigurasi dengan benar
@@ -145,12 +145,12 @@ GET http://api.raphnesia.my.id/api/v1/staff/list
 
 ### **Frontend (.env.local)**
 ```bash
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1
 ```
 
 ### **Backend (.env)**
 ```bash
-APP_URL=http://api.raphnesia.my.id
+APP_URL=http://api.alkapro.id
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
 

@@ -1,7 +1,7 @@
 // Teacher Service for API calls
 const API_BASE_URL = process.env.NEXT_PUBLIC_USE_PROXY === 'true' 
   ? '/api/proxy' 
-  : (process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id/api/v1')
+  : (process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id/api/v1')
 
 export interface Teacher {
   id: number

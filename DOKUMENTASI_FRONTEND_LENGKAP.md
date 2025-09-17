@@ -51,7 +51,7 @@ cp SIMPLE_FRONTEND_EXAMPLE.tsx app/program-khusus/ict/page.tsx
 # useProgramData('tahfidz') → useProgramData('ict')
 
 # 3. Setup environment
-echo "NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1" > .env.local
+echo "NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1" > .env.local
 
 # 4. Install dependencies
 npm install next
@@ -72,7 +72,7 @@ cp REACT_SIMPLE_EXAMPLE.jsx src/pages/ProgramICT.jsx
 # useProgramData('tahfidz') → useProgramData('ict')
 
 # 3. Setup environment
-echo "REACT_APP_API_URL=http://api.raphnesia.my.id/api/v1" > .env
+echo "REACT_APP_API_URL=http://api.alkapro.id/api/v1" > .env
 
 # 4. Install dependencies
 npm install react react-dom react-router-dom
@@ -145,7 +145,7 @@ function useProgramData(type: 'tahfidz' | 'ict') {
         setLoading(true);
         
         // Fetch complete data
-        const response = await fetch(`http://api.raphnesia.my.id/api/v1/special-programs/type/${type}/complete`);
+        const response = await fetch(`http://api.alkapro.id/api/v1/special-programs/type/${type}/complete`);
         const result = await response.json();
         
         if (result.success) {
@@ -432,7 +432,7 @@ function useProgramData(type) {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await fetch(`http://api.raphnesia.my.id/api/v1/special-programs/type/${type}/complete`);
+        const response = await fetch(`http://api.alkapro.id/api/v1/special-programs/type/${type}/complete`);
         const result = await response.json();
         
         if (result.success) {
@@ -676,7 +676,7 @@ export default ProgramTahfidz;
 
 ### Base URL
 ```
-http://api.raphnesia.my.id/api/v1
+http://api.alkapro.id/api/v1
 ```
 
 ### Endpoints
@@ -712,8 +712,8 @@ GET /special-programs
       "type": "tahfidz",
       "title": "Program Tahfidz",
       "subtitle": "Hafalan Al-Quran Terbaik",
-      "hero_desktop_image": "http://api.raphnesia.my.id/storage/...",
-      "hero_mobile_image": "http://api.raphnesia.my.id/storage/...",
+      "hero_desktop_image": "http://api.alkapro.id/storage/...",
+      "hero_mobile_image": "http://api.alkapro.id/storage/...",
       "intro_badge_text": "Program Unggulan",
       "intro_main_title": "Tahfidz Al-Quran",
       "intro_description": "Program hafalan Al-Quran...",
@@ -726,12 +726,12 @@ GET /special-programs
       ],
       "gallery_images": [
         {
-          "image": "http://api.raphnesia.my.id/storage/...",
+          "image": "http://api.alkapro.id/storage/...",
           "title": "Kegiatan Tahfidz",
           "description": "Suasana belajar..."
         }
       ],
-      "cta_background_image": "http://api.raphnesia.my.id/storage/...",
+      "cta_background_image": "http://api.alkapro.id/storage/...",
       "cta_title": "Bergabung Sekarang",
       "cta_description": "Daftar program tahfidz...",
       "cta_primary_button_text": "Daftar Sekarang",
@@ -742,7 +742,7 @@ GET /special-programs
         "id": 1,
         "title": "Tahfidz Dasar",
         "description": "Program untuk pemula...",
-        "image": "http://api.raphnesia.my.id/storage/...",
+        "image": "http://api.alkapro.id/storage/...",
         "is_featured": true
       }
     ]
@@ -816,12 +816,12 @@ style={{ padding: '64px 16px' }} // → '80px 16px'
 php artisan serve
 
 # Cek di browser:
-http://api.raphnesia.my.id/api/v1/special-programs/type/tahfidz/complete
+http://api.alkapro.id/api/v1/special-programs/type/tahfidz/complete
 ```
 
 ### ❌ Data Tidak Muncul
 **Solusi:**
-1. Cek admin panel: `http://api.raphnesia.my.id/admin/special-program-type-settings`
+1. Cek admin panel: `http://api.alkapro.id/admin/special-program-type-settings`
 2. Pastikan data Tahfidz/ICT sudah ada
 3. Pastikan `is_active = true`
 4. Pastikan ada gambar yang diupload
@@ -909,7 +909,7 @@ function App() {
 ## 📋 Checklist Implementasi
 
 ### ✅ Persiapan
-- [ ] Backend berjalan di `http://api.raphnesia.my.id`
+- [ ] Backend berjalan di `http://api.alkapro.id`
 - [ ] Data Tahfidz/ICT sudah ada di admin panel
 - [ ] Storage link sudah dibuat (`php artisan storage:link`)
 

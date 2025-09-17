@@ -106,7 +106,7 @@ Debug: Grid Type: "grid-cols-2" | Display Type: "bagan" | Bidang Count: 3
 ### **Jika Grid Tidak Berfungsi:**
 1. **Cek backend response:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi-content
+   curl http://api.alkapro.id/api/v1/struktur-organisasi-content
    ```
 
 2. **Cek grid_type di response:**

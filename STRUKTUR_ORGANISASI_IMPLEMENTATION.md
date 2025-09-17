@@ -320,13 +320,13 @@ export function useStrukturOrganisasi() {
 ### **1. Test Backend API:**
 ```bash
 # Test complete data
-curl http://api.raphnesia.my.id/api/v1/struktur-organisasi/complete
+curl http://api.alkapro.id/api/v1/struktur-organisasi/complete
 
 # Test struktur organisasi
-curl http://api.raphnesia.my.id/api/v1/struktur-organisasi
+curl http://api.alkapro.id/api/v1/struktur-organisasi
 
 # Test content
-curl http://api.raphnesia.my.id/api/v1/struktur-organisasi-content
+curl http://api.alkapro.id/api/v1/struktur-organisasi-content
 ```
 
 ### **2. Test Frontend:**

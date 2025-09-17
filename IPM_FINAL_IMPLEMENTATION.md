@@ -321,13 +321,13 @@ export function useIPM() {
 ### **1. Test Backend API:**
 ```bash
 # Test complete data
-curl http://api.raphnesia.my.id/api/v1/ipm/complete
+curl http://api.alkapro.id/api/v1/ipm/complete
 
 # Test pengurus
-curl http://api.raphnesia.my.id/api/v1/ipm
+curl http://api.alkapro.id/api/v1/ipm
 
 # Test content
-curl http://api.raphnesia.my.id/api/v1/ipm-content
+curl http://api.alkapro.id/api/v1/ipm-content
 ```
 
 ### **2. Test Frontend:**

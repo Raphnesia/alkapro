@@ -56,7 +56,7 @@ Menyimpan pengaturan umum untuk halaman Program Khusus seperti title, subtitle, 
 
 ### Base URL
 ```
-http://api.raphnesia.my.id/api/v1
+http://api.alkapro.id/api/v1
 ```
 
 ### 1. List Programs
@@ -87,7 +87,7 @@ GET /special-programs?display_location=program_khusus
         "Bimbingan ustadz berpengalaman",
         "Target hafalan yang terstruktur"
       ],
-      "image": "http://api.raphnesia.my.id/storage/special-programs/image.jpg",
+      "image": "http://api.alkapro.id/storage/special-programs/image.jpg",
       "order_index": 1,
       "is_active": true
     }

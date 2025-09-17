@@ -136,7 +136,7 @@ GET /api/v1/facilities/sub/{parentSlug}/{slug}  // Single sub-facility
 ### **1. Setup Environment**
 Pastikan environment variables sudah dikonfigurasi:
 ```env
-NEXT_PUBLIC_API_BASE_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_BASE_URL=http://api.alkapro.id/api/v1
 ```
 
 ### **2. Backend Configuration**

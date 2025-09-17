@@ -37,7 +37,7 @@ Setiap tipe memiliki:
 
 ### 📌 Base URL
 ```
-http://api.raphnesia.my.id/api/v1
+http://api.alkapro.id/api/v1
 ```
 
 ### 🎯 Endpoint Utama
@@ -753,7 +753,7 @@ export default function ICTPage() {
 import axios from 'axios';
 
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id/api/v1',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id/api/v1',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -803,7 +803,7 @@ export function getImageUrl(imagePath: string | null): string | null {
   }
   
   // Construct full URL
-  const baseUrl = process.env.NEXT_PUBLIC_STORAGE_URL || 'http://api.raphnesia.my.id/storage';
+  const baseUrl = process.env.NEXT_PUBLIC_STORAGE_URL || 'http://api.alkapro.id/storage';
   return `${baseUrl}/${imagePath.replace(/^\//, '')}`;
 }
 
@@ -911,8 +911,8 @@ mkdir -p app/program-khusus/ict
 
 ```env
 # .env.local
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
-NEXT_PUBLIC_STORAGE_URL=http://api.raphnesia.my.id/storage
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1
+NEXT_PUBLIC_STORAGE_URL=http://api.alkapro.id/storage
 ```
 
 ---

@@ -3,7 +3,7 @@
 ## 📋 **Status Saat Ini:**
 
 ### **Backend Status:**
-- ✅ **Backend berjalan** di `http://api.raphnesia.my.id`
+- ✅ **Backend berjalan** di `http://api.alkapro.id`
 - ✅ **API endpoint** `/api/v1/struktur-organisasi/complete` merespons dengan status 200
 - ❌ **Data `settings`** kosong/null
 - ❌ **Data `struktur_organisasi`** array kosong
@@ -75,7 +75,7 @@ if (hasBackendData && data) {
 
 ### **Untuk Admin Backend:**
 1. **Tambahkan Data Settings:**
-   - Login ke admin panel: `http://api.raphnesia.my.id/admin`
+   - Login ke admin panel: `http://api.alkapro.id/admin`
    - Buka menu "Pengaturan Struktur Organisasi"
    - Isi data banner, title, subtitle
 
@@ -90,13 +90,13 @@ if (hasBackendData && data) {
 4. **Verifikasi Data:**
    ```bash
    # Test complete data
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi/complete
+   curl http://api.alkapro.id/api/v1/struktur-organisasi/complete
    
    # Test struktur organisasi
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi
+   curl http://api.alkapro.id/api/v1/struktur-organisasi
    
    # Test content
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi-content
+   curl http://api.alkapro.id/api/v1/struktur-organisasi-content
    ```
 
 ### **Untuk Frontend:**
@@ -111,28 +111,28 @@ if (hasBackendData && data) {
 ### **Jika masih menggunakan fallback:**
 1. **Cek backend status:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi/complete
+   curl http://api.alkapro.id/api/v1/struktur-organisasi/complete
    ```
 
 2. **Cek data settings:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi/settings
+   curl http://api.alkapro.id/api/v1/struktur-organisasi/settings
    ```
 
 3. **Cek data struktur organisasi:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi
+   curl http://api.alkapro.id/api/v1/struktur-organisasi
    ```
 
 4. **Cek data content:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/struktur-organisasi-content
+   curl http://api.alkapro.id/api/v1/struktur-organisasi-content
    ```
 
 ### **Jika backend tidak merespons:**
 1. **Cek apakah backend berjalan:**
    ```bash
-   curl http://api.raphnesia.my.id
+   curl http://api.alkapro.id
    ```
 
 2. **Cek CORS settings** di backend Laravel

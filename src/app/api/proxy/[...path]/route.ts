@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // Gunakan environment variable untuk production
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.raphnesia.my.id/api/v1'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE || process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.alkapro.id/api/v1'
 
 export async function GET(request: NextRequest, context: { params: Promise<{ path: string[] }> }) {
 	const params = await context.params

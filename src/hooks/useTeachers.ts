@@ -97,7 +97,7 @@ export const useTeachers = (): UseTeachersReturn => {
         console.log('Trying direct API call...')
         const apiUrl = process.env.NEXT_PUBLIC_USE_PROXY === 'true' 
           ? '/api/proxy/teachers' 
-          : 'http://api.raphnesia.my.id/api/v1/teachers'
+          : 'http://api.alkapro.id/api/v1/teachers'
         const response = await fetch(apiUrl)
         if (response.ok) {
           const data = await response.json()

@@ -26,14 +26,14 @@ export function VideoBackground({
     
     // Jika relative path dengan /storage/, gunakan langsung
     if (src.startsWith('/storage/')) {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id/api'
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id/api'
       const backendOrigin = apiBase.replace(/\/api.*$/, '')
       return `${backendOrigin}${src}`
     }
     
     // Jika hanya filename, tambahkan path storage lengkap untuk home/hero
     if (!src.includes('/')) {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.raphnesia.my.id/api'
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://api.alkapro.id/api'
       const backendOrigin = apiBase.replace(/\/api.*$/, '')
       return `${backendOrigin}/storage/home/hero/${src}`
     }

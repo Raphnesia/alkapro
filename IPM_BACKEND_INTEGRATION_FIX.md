@@ -3,7 +3,7 @@
 ## 📋 Masalah yang Ditemukan
 
 ### **Backend Status:**
-- ✅ Backend berjalan di `http://api.raphnesia.my.id`
+- ✅ Backend berjalan di `http://api.alkapro.id`
 - ✅ API endpoint `/api/v1/ipm/complete` merespons dengan status 200
 - ❌ Data `settings` dan `pengurus` kosong/null
 - ✅ Data `content` tersedia (informasi tentang IPM)
@@ -110,7 +110,7 @@ if (hasBackendData && data) {
 
 ### **Untuk Admin Backend:**
 1. **Tambahkan Data Settings IPM:**
-   - Login ke admin panel: `http://api.raphnesia.my.id/admin`
+   - Login ke admin panel: `http://api.alkapro.id/admin`
    - Buka menu "Pengaturan IPM"
    - Isi data banner, title, subtitle
 
@@ -121,13 +121,13 @@ if (hasBackendData && data) {
 3. **Verifikasi Data:**
    ```bash
    # Test settings
-   curl http://api.raphnesia.my.id/api/v1/ipm/settings
+   curl http://api.alkapro.id/api/v1/ipm/settings
    
    # Test pengurus
-   curl http://api.raphnesia.my.id/api/v1/ipm
+   curl http://api.alkapro.id/api/v1/ipm
    
    # Test complete data
-   curl http://api.raphnesia.my.id/api/v1/ipm/complete
+   curl http://api.alkapro.id/api/v1/ipm/complete
    ```
 
 ### **Untuk Frontend:**
@@ -142,23 +142,23 @@ if (hasBackendData && data) {
 ### **Jika masih menggunakan fallback:**
 1. **Cek backend status:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/ipm/complete
+   curl http://api.alkapro.id/api/v1/ipm/complete
    ```
 
 2. **Cek data settings:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/ipm/settings
+   curl http://api.alkapro.id/api/v1/ipm/settings
    ```
 
 3. **Cek data pengurus:**
    ```bash
-   curl http://api.raphnesia.my.id/api/v1/ipm
+   curl http://api.alkapro.id/api/v1/ipm
    ```
 
 ### **Jika backend tidak merespons:**
 1. **Cek apakah backend berjalan:**
    ```bash
-   curl http://api.raphnesia.my.id
+   curl http://api.alkapro.id
    ```
 
 2. **Cek CORS settings** di backend Laravel

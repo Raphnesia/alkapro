@@ -12,7 +12,7 @@ const InfoPPDB = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || 'http://api.raphnesia.my.id/api'
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || 'http://api.alkapro.id/api'
   const backendOrigin = useMemo(() => {
     try {
       const url = new URL(apiBase as string)

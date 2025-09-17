@@ -477,7 +477,7 @@ php artisan storage:link
 ### **2. Frontend Setup**
 ```bash
 # 1. Update environment variables
-NEXT_PUBLIC_API_URL=http://api.raphnesia.my.id/api/v1
+NEXT_PUBLIC_API_URL=http://api.alkapro.id/api/v1
 
 # 2. Install dependencies (if needed)
 npm install
@@ -516,9 +516,9 @@ npm run dev
 ### **Backend Testing**
 ```bash
 # Test API endpoints
-curl http://api.raphnesia.my.id/api/v1/teachers
-curl http://api.raphnesia.my.id/api/v1/teachers/by-subject
-curl http://api.raphnesia.my.id/api/v1/teacher-settings
+curl http://api.alkapro.id/api/v1/teachers
+curl http://api.alkapro.id/api/v1/teachers/by-subject
+curl http://api.alkapro.id/api/v1/teacher-settings
 ```
 
 ### **Frontend Testing**

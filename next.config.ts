@@ -2,17 +2,17 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['api.raphnesia.my.id', 'raphnesia.my.id'],
+    domains: ['api.alkapro.id', 'alkapro.id'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'api.raphnesia.my.id',
+        hostname: 'api.alkapro.id',
         port: '',
         pathname: '/storage/**',
       },
       {
         protocol: 'https',
-        hostname: 'raphnesia.my.id',
+        hostname: 'alkapro.id',
         port: '',
         pathname: '/**',
       }
@@ -45,7 +45,7 @@ const nextConfig = {
   //   return [
   //     {
   //       source: '/api/:path*',
-  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.raphnesia.my.id/api/v1'}/:path*`
+  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.alkapro.id/api/v1'}/:path*`
   //     }
   //   ]
   // },

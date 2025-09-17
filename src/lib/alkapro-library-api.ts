@@ -111,7 +111,7 @@ class AlkaproLibraryAPI {
   private baseURL: string
 
   constructor() {
-    this.baseURL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.raphnesia.my.id/api/v1'
+    this.baseURL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.alkapro.id/api/v1'
   }
 
   private buildImageUrl(path?: string, fallback?: string): string {

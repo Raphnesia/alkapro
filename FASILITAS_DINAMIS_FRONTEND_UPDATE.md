@@ -307,7 +307,7 @@ Untuk setiap sub-facility:
 ### **1. API Structure Test**
 ```javascript
 // Test API response structure
-fetch('http://api.raphnesia.my.id/api/v1/facilities')
+fetch('http://api.alkapro.id/api/v1/facilities')
   .then(r => r.json())
   .then(d => {
     console.log('Settings:', !!d.data.settings);

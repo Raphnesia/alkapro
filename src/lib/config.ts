@@ -7,10 +7,10 @@ export const config = {
     // Gunakan proxy Next.js untuk menghindari CORS
     baseUrl: process.env.NEXT_PUBLIC_USE_PROXY === 'true' 
       ? '/api/proxy' 
-      : 'https://api.raphnesia.my.id/api/v1',
+      : 'https://api.alkapro.id/api/v1',
     timeout: 10000, // 10 seconds
     // Laravel API URL asli (untuk proxy)
-    laravelUrl: 'https://api.raphnesia.my.id/api/v1',
+    laravelUrl: 'https://api.alkapro.id/api/v1',
   },
   
   // Site Configuration
@@ -79,7 +79,7 @@ export function getImageUrl(path: string): string {
   }
   
   // Base URL untuk gambar (tanpa /api/v1)
-  const baseUrl = 'https://api.raphnesia.my.id'
+  const baseUrl = 'https://api.alkapro.id'
   console.log('🖼️ Base URL for images:', baseUrl)
   
   // Normalize path
