@@ -279,6 +279,26 @@ export const profileApi = {
   getBySlug: (slug: string) => fetchApi<ProfileSection>(`/profile-sections/${slug}`),
 };
 
+// Popup Settings Interface
+export interface PopupSettings {
+  id?: number;
+  is_active: boolean;
+  image_url: string;
+  image_alt?: string;
+  link_url?: string;
+  open_in_new_tab?: boolean;
+  show_on_first_visit_only?: boolean;
+  delay_before_show?: number; // in milliseconds
+  expires_at?: string; // ISO date string
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Popup Settings API
+export const popupApi = {
+  getSettings: () => fetchApi<PopupSettings>('/popup-settings', { cache: 'no-store' }),
+};
+
 // Facilities API
 export const facilityApi = {
   getAll: () => fetchApi<Facility[]>('/facilities'),

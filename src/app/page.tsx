@@ -17,7 +17,7 @@ import SocialMediaFeedSection from '@/components/SocialMediaFeedSection'
 import AlkaproEcosystemSection from '@/components/AlkaproEcosystemSection'
 import YouTubeSection from '@/components/YouTubeSection'
 import { useI18n } from '@/hooks/useI18n'
-import { homeApi, HomeSection, InstagramApiPost, SocialSettings } from '@/lib/api'
+import { homeApi, HomeSection, InstagramApiPost, SocialSettings, popupApi, PopupSettings } from '@/lib/api'
 
 export default function Home() {
   const { t, currentLocale } = useI18n();
@@ -32,6 +32,7 @@ export default function Home() {
   const [whyTranslated, setWhyTranslated] = useState<any | null>(null)
   const [heroLoaded, setHeroLoaded] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
+  const [popupSettings, setPopupSettings] = useState<PopupSettings | null>(null)
 
   const rotatingWords = [
     (hero?.config_data?.flip_text as string) || t('header.home') + ", Sekolah Surgaku",
@@ -173,19 +174,77 @@ export default function Home() {
     }
   ]
 
-  // Show popup on page load/reload
+  // Load Popup Settings from backend
   useEffect(() => {
-    // Show popup immediately without delay
-    const timer = setTimeout(() => {
-      setShowPopup(true)
-    }, 50) // Very short delay to ensure DOM is ready
-    
-    return () => clearTimeout(timer)
+    let mounted = true
+
+    const fetchPopupSettings = async () => {
+      try {
+        const settings = await popupApi.getSettings()
+        
+        if (!mounted) return
+
+        // Check if popup is active
+        if (!settings.is_active) {
+          setPopupSettings(null)
+          return
+        }
+
+        // Check if popup has expired
+        if (settings.expires_at) {
+          const expiresAt = new Date(settings.expires_at)
+          const now = new Date()
+          if (now > expiresAt) {
+            setPopupSettings(null)
+            return
+          }
+        }
+
+        setPopupSettings(settings)
+
+        // Check if should show on first visit only
+        if (settings.show_on_first_visit_only) {
+          const hasSeenPopup = localStorage.getItem('has_seen_popup')
+          if (hasSeenPopup) {
+            return
+          }
+        }
+
+        // Show popup with delay if specified
+        const delay = settings.delay_before_show || 0
+        setTimeout(() => {
+          if (mounted) {
+            setShowPopup(true)
+          }
+        }, delay)
+      } catch (error) {
+        console.error('Error fetching popup settings:', error)
+        // Fallback to default popup if API fails
+        setPopupSettings({
+          is_active: true,
+          image_url: '/popupimage.jpg',
+          image_alt: 'Popup Image',
+          show_on_first_visit_only: false,
+          delay_before_show: 0,
+        })
+        setTimeout(() => {
+          if (mounted) {
+            setShowPopup(true)
+          }
+        }, 1000)
+      }
+    }
+
+    fetchPopupSettings()
+
+    return () => {
+      mounted = false
+    }
   }, [])
   
   // Play sound effect separately after popup is shown
   useEffect(() => {
-    if (showPopup) {
+    if (showPopup && popupSettings) {
       // Play sound effect asynchronously without blocking popup display
       const playAudio = async () => {
         try {
@@ -197,7 +256,7 @@ export default function Home() {
       }
       playAudio()
     }
-  }, [showPopup])
+  }, [showPopup, popupSettings])
 
   // Load Home sections from backend (update per section begitu selesai, tanpa menunggu semuanya)
   useEffect(() => {
@@ -409,21 +468,52 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Welcome Popup */}
-      {showPopup && (
+      {showPopup && popupSettings && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]">
           <div className="relative animate-fade-in">
             <button 
-              onClick={() => setShowPopup(false)}
+              onClick={() => {
+                setShowPopup(false)
+                // Mark as seen if first visit only
+                if (popupSettings.show_on_first_visit_only) {
+                  localStorage.setItem('has_seen_popup', 'true')
+                }
+              }}
               className="absolute top-2 right-2 text-white hover:text-gray-300 text-3xl font-bold z-10 bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center"
             >
               ×
             </button>
-            <img 
-              src="/popupimage.jpg" 
-              alt="Popup Image" 
-              className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
-              onClick={() => setShowPopup(false)}
-            />
+            {popupSettings.link_url ? (
+              <a
+                href={popupSettings.link_url}
+                target={popupSettings.open_in_new_tab ? '_blank' : '_self'}
+                rel={popupSettings.open_in_new_tab ? 'noopener noreferrer' : undefined}
+                onClick={() => {
+                  setShowPopup(false)
+                  if (popupSettings.show_on_first_visit_only) {
+                    localStorage.setItem('has_seen_popup', 'true')
+                  }
+                }}
+              >
+                <img 
+                  src={popupSettings.image_url} 
+                  alt={popupSettings.image_alt || 'Popup Image'} 
+                  className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
+                />
+              </a>
+            ) : (
+              <img 
+                src={popupSettings.image_url} 
+                alt={popupSettings.image_alt || 'Popup Image'} 
+                className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
+                onClick={() => {
+                  setShowPopup(false)
+                  if (popupSettings.show_on_first_visit_only) {
+                    localStorage.setItem('has_seen_popup', 'true')
+                  }
+                }}
+              />
+            )}
           </div>
         </div>
       )}
