@@ -1,0 +1,144 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Islamic Pattern -->
+  <defs>
+    <pattern id="islamicPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#f0f9ff"/>
+      <circle cx="20" cy="20" r="2" fill="#3b82f6" opacity="0.3"/>
+      <path d="M10 10 L30 10 L20 30 Z" fill="#10b981" opacity="0.2"/>
+    </pattern>
+    
+    <linearGradient id="skinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="hijabGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="uniformGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="500" fill="url(#islamicPattern)"/>
+  
+  <!-- Islamic Geometric Decorations -->
+  <g opacity="0.4">
+    <!-- Star Pattern Top -->
+    <g transform="translate(50, 30)">
+      <polygon points="15,5 18,12 25,12 20,17 22,24 15,20 8,24 10,17 5,12 12,12" fill="#10b981"/>
+    </g>
+    
+    <!-- Crescent Moon -->
+    <g transform="translate(320, 40)">
+      <path d="M15 5 C10 10, 10 20, 15 25 C12 22, 10 18, 10 15 C10 12, 12 8, 15 5 Z" fill="#fbbf24"/>
+    </g>
+    
+    <!-- Geometric Pattern Bottom -->
+    <g transform="translate(60, 420)">
+      <rect x="0" y="0" width="20" height="20" fill="#3b82f6" opacity="0.3" transform="rotate(45 10 10)"/>
+      <rect x="25" y="0" width="20" height="20" fill="#10b981" opacity="0.3" transform="rotate(45 35 10)"/>
+    </g>
+  </g>
+  
+  <!-- Student Figure -->
+  <g transform="translate(150, 80)">
+    <!-- Body -->
+    <ellipse cx="50" cy="280" rx="45" ry="80" fill="url(#uniformGradient)"/>
+    
+    <!-- Arms -->
+    <ellipse cx="20" cy="220" rx="15" ry="40" fill="url(#uniformGradient)" transform="rotate(-20 20 220)"/>
+    <ellipse cx="80" cy="220" rx="15" ry="40" fill="url(#uniformGradient)" transform="rotate(20 80 220)"/>
+    
+    <!-- Hands -->
+    <circle cx="15" cy="250" r="12" fill="url(#skinGradient)"/>
+    <circle cx="85" cy="250" r="12" fill="url(#skinGradient)"/>
+    
+    <!-- Book in hand -->
+    <rect x="8" y="245" width="15" height="10" fill="#ef4444" rx="2"/>
+    <rect x="9" y="246" width="13" height="1" fill="#ffffff"/>
+    <rect x="9" y="248" width="13" height="1" fill="#ffffff"/>
+    
+    <!-- Trophy in other hand -->
+    <g transform="translate(78, 240)">
+      <rect x="0" y="0" width="8" height="12" fill="#fbbf24" rx="1"/>
+      <rect x="-2" y="3" width="12" height="6" fill="#f59e0b" rx="3"/>
+      <circle cx="4" cy="6" r="2" fill="#fbbf24"/>
+    </g>
+    
+    <!-- Neck -->
+    <rect x="40" y="140" width="20" height="25" fill="url(#skinGradient)" rx="10"/>
+    
+    <!-- Face -->
+    <ellipse cx="50" cy="120" rx="35" ry="40" fill="url(#skinGradient)"/>
+    
+    <!-- Hijab -->
+    <path d="M15 100 Q50 70 85 100 L85 140 Q50 160 15 140 Z" fill="url(#hijabGradient)"/>
+    
+    <!-- Hijab decoration -->
+    <circle cx="30" cy="110" r="3" fill="#fbbf24" opacity="0.7"/>
+    <circle cx="70" cy="110" r="3" fill="#fbbf24" opacity="0.7"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="40" cy="115" rx="4" ry="6" fill="#1f2937"/>
+    <ellipse cx="60" cy="115" rx="4" ry="6" fill="#1f2937"/>
+    <ellipse cx="40" cy="113" rx="2" ry="3" fill="#ffffff"/>
+    <ellipse cx="60" cy="113" rx="2" ry="3" fill="#ffffff"/>
+    
+    <!-- Eyebrows -->
+    <path d="M35 108 Q40 106 45 108" stroke="#1f2937" stroke-width="2" fill="none"/>
+    <path d="M55 108 Q60 106 65 108" stroke="#1f2937" stroke-width="2" fill="none"/>
+    
+    <!-- Nose -->
+    <ellipse cx="50" cy="125" rx="2" ry="4" fill="#f59e0b" opacity="0.6"/>
+    
+    <!-- Smile -->
+    <path d="M42 135 Q50 142 58 135" stroke="#1f2937" stroke-width="2" fill="none"/>
+    
+    <!-- School uniform details -->
+    <rect x="35" y="180" width="30" height="40" fill="#1e40af" rx="5"/>
+    <rect x="37" y="185" width="26" height="2" fill="#fbbf24"/>
+    <circle cx="50" cy="200" r="3" fill="#fbbf24"/>
+    
+    <!-- School badge -->
+    <circle cx="42" cy="190" r="6" fill="#ffffff"/>
+    <circle cx="42" cy="190" r="4" fill="#10b981"/>
+    <text x="42" y="193" text-anchor="middle" font-size="6" fill="#ffffff" font-weight="bold">M</text>
+  </g>
+  
+  <!-- Achievement Elements -->
+  <g transform="translate(50, 350)">
+    <!-- Medal -->
+    <circle cx="0" cy="0" r="15" fill="#fbbf24"/>
+    <circle cx="0" cy="0" r="10" fill="#f59e0b"/>
+    <polygon points="0,-5 3,0 0,5 -3,0" fill="#fbbf24"/>
+    <rect x="-2" y="15" width="4" height="20" fill="#ef4444"/>
+  </g>
+  
+  <g transform="translate(320, 380)">
+    <!-- Certificate -->
+    <rect x="0" y="0" width="40" height="30" fill="#ffffff" stroke="#3b82f6" stroke-width="2" rx="3"/>
+    <rect x="5" y="5" width="30" height="2" fill="#3b82f6"/>
+    <rect x="5" y="10" width="25" height="1" fill="#6b7280"/>
+    <rect x="5" y="13" width="20" height="1" fill="#6b7280"/>
+    <circle cx="32" cy="22" r="4" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Floating Islamic Calligraphy Style Elements -->
+  <g opacity="0.3">
+    <text x="80" y="150" font-family="serif" font-size="24" fill="#10b981" transform="rotate(-15 80 150)">بسم الله</text>
+    <text x="280" y="200" font-family="serif" font-size="18" fill="#3b82f6" transform="rotate(10 280 200)">الحمد لله</text>
+  </g>
+  
+  <!-- Success Rays -->
+  <g transform="translate(200, 250)" opacity="0.4">
+    <path d="M0 0 L5 -20 L10 0 Z" fill="#fbbf24"/>
+    <path d="M0 0 L20 -5 L0 -10 Z" fill="#fbbf24" transform="rotate(45)"/>
+    <path d="M0 0 L5 20 L10 0 Z" fill="#fbbf24" transform="rotate(90)"/>
+    <path d="M0 0 L-20 5 L0 10 Z" fill="#fbbf24" transform="rotate(135)"/>
+  </g>
+</svg>

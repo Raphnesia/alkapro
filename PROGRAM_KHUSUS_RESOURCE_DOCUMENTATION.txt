@@ -1,0 +1,188 @@
+# 📚 Dokumentasi Resource Program Khusus (Tahfidz & ICT)
+
+## 🎯 Overview
+
+Resource ini dibuat khusus untuk mengelola program Tahfidz dan ICT secara terpisah di dashboard Filament, berdasarkan struktur frontend yang telah ada. Setiap program memiliki resource terpisah untuk kemudahan pengelolaan.
+
+## 🗂️ Struktur Resource
+
+### 1. TahfidzProgramResource
+- **Path**: `app/Filament/Resources/TahfidzProgramResource.php`
+- **Model**: `SpecialProgram` (filtered by type='tahfidz')
+- **Icon**: 📖 `heroicon-o-book-open`
+- **Navigation Group**: Program Khusus
+- **Sort Order**: 1
+
+### 2. ICTProgramResource
+- **Path**: `app/Filament/Resources/ICTProgramResource.php`
+- **Model**: `SpecialProgram` (filtered by type='ict')
+- **Icon**: 💻 `heroicon-o-computer-desktop`
+- **Navigation Group**: Program Khusus
+- **Sort Order**: 2
+
+## 🔧 Fitur Utama
+
+### Form Fields
+
+#### Informasi Dasar
+- **Judul Program**: Text input untuk nama program
+- **Tampil di Halaman**: Select (Home/Program Khusus)
+- **Deskripsi Program**: Textarea untuk deskripsi lengkap
+- **Tipe Konten**: Select (Rich Text/Grid Layout)
+- **Urutan Tampilan**: Numeric input untuk sorting
+- **Status Aktif**: Toggle untuk mengaktifkan/menonaktifkan
+
+#### Konten Visual
+- **Gambar Utama**: File upload dengan direktori terpisah per tipe
+  - Tahfidz: `special-programs/tahfidz/`
+  - ICT: `special-programs/ict/`
+
+#### Keunggulan Program
+- **Repeater Field**: Untuk menambah multiple keunggulan
+- **Default Items**: 4 item awal
+- **Dynamic Add/Remove**: Bisa menambah/mengurangi sesuai kebutuhan
+
+### Table Columns
+
+1. **Gambar**: Circular image preview
+2. **Judul Program**: Searchable dan sortable
+3. **Tampil di**: Badge dengan warna berbeda
+4. **Tipe Konten**: Badge untuk Rich Text/Grid
+5. **Keunggulan**: Menampilkan 2 item pertama + counter
+6. **Urutan**: Numeric sorting
+7. **Aktif**: Toggle column untuk quick enable/disable
+8. **Dibuat**: Timestamp (hidden by default)
+
+### Filters
+
+1. **Tampil di Halaman**: Filter berdasarkan lokasi tampil
+2. **Tipe Konten**: Filter berdasarkan jenis konten
+3. **Status Aktif**: Ternary filter (Aktif/Tidak Aktif/Semua)
+
+## 🎨 Integrasi dengan Frontend
+
+### Data Structure yang Dihasilkan
+
+```json
+{
+  "id": 1,
+  "type": "tahfidz",
+  "title": "Program Tahfidz Al-Azhar",
+  "description": "Program unggulan...",
+  "display_location": "program_khusus",
+  "content_type": "rich",
+  "features": [
+    {"feature": "Metode Hafalan Terpadu"},
+    {"feature": "Instruktur Berpengalaman"},
+    {"feature": "Lingkungan Islami"},
+    {"feature": "Evaluasi Berkala"}
+  ],
+  "image": "http://api.alkapro.id/storage/special-programs/tahfidz/image.jpg",
+  "order_index": 0,
+  "is_active": true
+}
+```
+
+### Penggunaan di Frontend
+
+Data dari resource ini akan dikonsumsi oleh:
+- `useProgramKhususByType('tahfidz')` hook
+- `useProgramKhususByType('ict')` hook
+
+Sesuai dengan struktur yang sudah ada di:
+- `/e:/Nextjs/school-backend/tahfidz/page.txt`
+- `/e:/Nextjs/school-backend/ict/page.txt`
+
+## 🚀 Cara Penggunaan
+
+### 1. Akses Dashboard
+1. Login ke Filament Admin Panel
+2. Navigasi ke **Program Khusus** di sidebar
+3. Pilih **📖 Program Tahfidz** atau **💻 Program ICT**
+
+### 2. Membuat Program Baru
+1. Klik tombol **"Tambah Program"**
+2. Isi form dengan data yang sesuai:
+   - Judul program yang menarik
+   - Pilih lokasi tampil (biasanya "Program Khusus")
+   - Tulis deskripsi yang informatif
+   - Upload gambar yang relevan
+   - Tambahkan keunggulan program
+3. Klik **"Simpan"**
+
+### 3. Mengelola Program Existing
+- **Edit**: Klik icon pensil di tabel
+- **Delete**: Klik icon trash di tabel
+- **Toggle Status**: Klik toggle di kolom "Aktif"
+- **Filter**: Gunakan filter di atas tabel
+- **Search**: Gunakan search box untuk mencari berdasarkan judul
+
+## 🔍 Tips & Best Practices
+
+### Penamaan Program
+- **Tahfidz**: Gunakan nama yang mencerminkan aspek spiritual
+  - Contoh: "Program Tahfidz Al-Azhar", "Tahfidz Plus Akhlak"
+- **ICT**: Gunakan nama yang mencerminkan teknologi modern
+  - Contoh: "ICT Digital Excellence", "Smart Technology Program"
+
+### Gambar
+- **Tahfidz**: Gunakan gambar yang berkaitan dengan Al-Quran, mushaf, atau suasana pembelajaran agama
+- **ICT**: Gunakan gambar komputer, coding, teknologi, atau lab komputer
+- **Ukuran**: Maksimal 4MB, format JPG/PNG
+- **Resolusi**: Disarankan 800x600px atau lebih
+
+### Keunggulan Program
+- Maksimal 6-8 keunggulan per program
+- Gunakan kalimat singkat dan jelas
+- Fokus pada benefit untuk siswa
+- Hindari jargon teknis yang sulit dipahami
+
+### Urutan Tampilan
+- Gunakan kelipatan 10 (0, 10, 20, 30) untuk memudahkan penyisipan
+- Program utama/unggulan beri urutan lebih kecil
+- Program pendukung beri urutan lebih besar
+
+## 🔧 Troubleshooting
+
+### Masalah Umum
+
+1. **Gambar tidak muncul**
+   - Pastikan file sudah terupload dengan benar
+   - Cek permission folder storage
+   - Pastikan symbolic link sudah dibuat (`php artisan storage:link`)
+
+2. **Data tidak muncul di frontend**
+   - Pastikan status program "Aktif"
+   - Cek API endpoint `/api/v1/special-programs`
+   - Pastikan `display_location` sesuai dengan kebutuhan
+
+3. **Filter tidak bekerja**
+   - Clear cache browser
+   - Refresh halaman admin
+   - Cek console browser untuk error JavaScript
+
+### Maintenance
+
+- **Backup Data**: Lakukan backup database secara berkala
+- **Optimasi Gambar**: Kompres gambar sebelum upload
+- **Monitor Performance**: Pantau loading time halaman admin
+- **Update Content**: Review dan update konten secara berkala
+
+## 📊 Monitoring & Analytics
+
+### Metrics yang Perlu Dipantau
+1. **Jumlah Program Aktif**: Per tipe (Tahfidz/ICT)
+2. **Upload Gambar**: Size dan format
+3. **User Engagement**: Program mana yang paling sering diedit
+4. **Performance**: Loading time form dan tabel
+
+### Reporting
+- Export data program ke Excel/CSV jika diperlukan
+- Generate laporan bulanan untuk review konten
+- Monitor feedback dari frontend users
+
+---
+
+**🎉 Resource Program Khusus siap digunakan!**
+
+Dengan resource terpisah ini, pengelolaan program Tahfidz dan ICT menjadi lebih mudah, terorganisir, dan sesuai dengan kebutuhan frontend yang sudah ada.
