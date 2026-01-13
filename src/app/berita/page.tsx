@@ -44,66 +44,74 @@ const BeritaList = () => {
     return html.replace(/<[^>]*>/g, '').trim();
   };
 
-  // Ganti bagian excerpt generation di dalam useEffect
+  // Fetch semua halaman dari API
   useEffect(() => {
     const fetchBerita = async () => {
       try {
         console.log('🚀 useEffect berita berjalan!');
         
-        // Hanya gunakan proxy internal (hindari CORS dan Mixed Content)
-        let response = await fetch('/api/proxy/news', { cache: 'no-store' })
-        let data: any = null
-        let list: any[] = []
-        
-        if (response.ok) {
-          data = await response.json()
-          list = Array.isArray(data?.data) ? data.data : (Array.isArray(data) ? data : [])
-          console.log('📰 News response:', data);
-          console.log('📰 News list length:', list.length);
-        }
-        
-        // Jika endpoint news kosong, fallback ke articles lalu posts
-        if (!Array.isArray(list) || list.length === 0) {
-          console.log('⚠️ News kosong, coba articles...');
+        // Fungsi untuk mengambil semua halaman dari endpoint
+        const fetchAllPages = async (endpoint: string) => {
+          let allItems: any[] = []
+          let currentPage = 1
+          let hasMore = true
           
-          // 1) Articles
-          let articlesList: any[] = []
-          try {
-            const resArticles = await fetch('/api/proxy/articles', { cache: 'no-store' })
-            if (resArticles.ok) {
-              const json = await resArticles.json()
-              articlesList = Array.isArray(json?.data) ? json.data : (Array.isArray(json) ? json : [])
-              console.log('📚 Articles response:', json);
-              console.log('📚 Articles list length:', articlesList.length);
-            }
-          } catch (error) {
-            console.error('❌ Error fetching articles:', error);
-          }
-          
-          // 2) Posts jika articles juga kosong
-          let postsList: any[] = []
-          if (articlesList.length === 0) {
-            console.log('⚠️ Articles kosong, coba posts...');
+          while (hasMore) {
             try {
-              const resPosts = await fetch('/api/proxy/posts', { cache: 'no-store' })
-              if (resPosts.ok) {
-                const json = await resPosts.json()
-                postsList = Array.isArray(json?.data) ? json.data : (Array.isArray(json) ? json : [])
-                console.log('📝 Posts response:', json);
-                console.log('📝 Posts list length:', postsList.length);
+              const response = await fetch(`${endpoint}?page=${currentPage}`, { cache: 'no-store' })
+              if (!response.ok) {
+                console.error(`❌ News page ${currentPage} response not ok:`, response.status)
+                break
+              }
+              
+              const data = await response.json()
+              console.log(`📄 News page ${currentPage} response:`, data)
+              
+              const items = Array.isArray(data?.data) ? data.data : (Array.isArray(data) ? data : [])
+              
+              if (items.length === 0) {
+                hasMore = false
+              } else {
+                allItems = [...allItems, ...items]
+                
+                // Cek apakah ada halaman berikutnya - format API: current_page, last_page
+                const lastPage = data?.last_page
+                console.log(`📊 News page ${currentPage}: last_page=${lastPage}, items=${items.length}`)
+                if (lastPage) {
+                  hasMore = currentPage < lastPage
+                  currentPage++
+                } else {
+                  // Jika tidak ada pagination info, batasi maksimal 10 halaman
+                  if (currentPage >= 10) {
+                    hasMore = false
+                  } else {
+                    currentPage++
+                  }
+                }
               }
             } catch (error) {
-              console.error('❌ Error fetching posts:', error);
+              console.error(`❌ Error fetching news page ${currentPage}:`, error)
+              hasMore = false
             }
           }
           
-          list = articlesList.length > 0 ? articlesList : postsList
-          console.log('✅ Final list from fallback:', list.length);
+          console.log(`✅ News total items fetched:`, allItems.length)
+          return allItems
         }
+        
+        // Ambil semua data dari endpoint news
+        const list = await fetchAllPages('/api/proxy/news')
         
         if (Array.isArray(list) && list.length > 0) {
           console.log('🔄 Transforming data...');
-          const transformedData = list.map((item: any) => {
+          // Sort by date (terbaru dulu)
+          const sortedList = list.sort((a: any, b: any) => {
+            const dateA = new Date(a.published_at || a.created_at || 0).getTime()
+            const dateB = new Date(b.published_at || b.created_at || 0).getTime()
+            return dateB - dateA
+          })
+          
+          const transformedData = sortedList.map((item: any) => {
             const contentText = stripHtmlTags(item.content || '');
             const excerpt = item.subtitle ? stripHtmlTags(item.subtitle) : 
                            (contentText.length > 150 ? 
@@ -131,7 +139,7 @@ const BeritaList = () => {
           console.log('✅ Transformed data:', transformedData);
           setBeritaData(transformedData);
         } else {
-          console.error('❌ Invalid API response structure or empty list:', data);
+          console.error('❌ Invalid API response structure or empty list');
           setBeritaData([]);
         }
       } catch (error) {
@@ -148,24 +156,6 @@ const BeritaList = () => {
     {
       name: 'Semua',
       hasSubmenu: false
-    },
-    {
-      name: 'Akademik',
-      hasSubmenu: true,
-      submenu: ['Prestasi', 'Pendidikan', 'Penelitian']
-    },
-    {
-      name: 'Kampus',
-      hasSubmenu: true,
-      submenu: ['Kegiatan', 'Fasilitas', 'Alumni']
-    },
-    {
-      name: 'Internasional',
-      hasSubmenu: false
-    },
-    {
-      name: 'Perspektif',
-      hasSubmenu: false
     }
   ]
 
@@ -174,23 +164,8 @@ const BeritaList = () => {
     const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
     
-    // Map frontend categories to actual API categories
-    const categoryMap: { [key: string]: string } = {
-      'Akademik': 'academic',
-      'Prestasi': 'academic',
-      'Pendidikan': 'academic',
-      'Penelitian': 'academic',
-      'Kampus': 'campus',
-      'Kegiatan': 'campus',
-      'Fasilitas': 'campus',
-      'Alumni': 'campus',
-      'Internasional': 'international',
-      'Perspektif': 'perspective'
-    }
-    
-    const matchesCategory = selectedCategory === 'Semua' || 
-                           item.category === categoryMap[selectedCategory] ||
-                           item.category === selectedCategory.toLowerCase()
+    // Karena hanya ada "Semua", tidak perlu filter kategori
+    const matchesCategory = selectedCategory === 'Semua'
     return matchesSearch && matchesCategory
   })
 
@@ -268,24 +243,6 @@ const BeritaList = () => {
                           )}
                         </div>
                         
-                        {/* Submenu */}
-                        {item.hasSubmenu && expandedMenu === item.name && (
-                          <div className="mt-3 mr-4 space-y-2">
-                            {item.submenu?.map((subItem) => (
-                              <div 
-                                key={subItem}
-                                className={`text-right cursor-pointer text-sm transition-colors duration-200 ${
-                                  selectedCategory === subItem 
-                                    ? 'text-blue-600 font-medium' 
-                                    : 'text-gray-600 hover:text-blue-600'
-                                }`}
-                                onClick={() => handleSubmenuClick(subItem)}
-                              >
-                                {subItem}
-                              </div>
-                            ))}
-                          </div>
-                        )}
                       </div>
                     ))}
                   </div>
