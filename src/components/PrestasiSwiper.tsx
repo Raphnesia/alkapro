@@ -16,6 +16,34 @@ import { getImageUrl } from '@/lib/config'
 
 type PrestasiImage = { url: string; title: string }
 
+// Interface untuk data prestasi dari API
+interface PrestasiApiItem {
+  id: number
+  title: string
+  slug?: string
+  content?: string | null
+  subtitle?: string
+  image?: string
+  category?: string | null
+  type?: string
+  author?: string
+  tags?: string | string[]
+  meta_description?: string | null
+  published_at?: string
+  created_at?: string
+  read_time?: number
+}
+
+interface PrestasiApiResponse {
+  data?: PrestasiApiItem[]
+  pagination?: {
+    current_page: number
+    last_page: number
+    per_page: number
+    total: number
+  }
+}
+
 const fallbackPrestasiImages: PrestasiImage[] = [
   { url: "/prestasi siswa/'Prestasi gemilangmu tidak hanya mencerminkan bakatmu, tetapi juga dedikasi dan kerja keras yang.jpg", title: 'Prestasi Akademik' },
   { url: "/prestasi siswa/'Prestasi gemilangmu tidak hanya mencerminkan bakatmu, tetapi juga dedikasi dan kerja keras yang (1).jpg", title: 'Prestasi Akademik' },
@@ -31,38 +59,46 @@ export default function PrestasiSwiper() {
     ;(async () => {
       try {
         // Ambil data dari endpoint prestasi/list terlebih dahulu (diutamakan)
-        let prestasiListData: any[] = []
+        let prestasiListData: PrestasiApiItem[] = []
         try {
           const prestasiListRes = await fetch('https://api.alkapro.id/api/v1/prestasi/list', {
             headers: { Accept: 'application/json' },
             cache: 'no-store',
           })
           if (prestasiListRes.ok) {
-            const prestasiListJson = await prestasiListRes.json()
+            const prestasiListJson = await prestasiListRes.json() as PrestasiApiResponse | PrestasiApiItem[]
             // Handle response format: bisa { data: [...] } atau langsung array
-            prestasiListData = Array.isArray(prestasiListJson?.data) 
-              ? prestasiListJson.data 
-              : Array.isArray(prestasiListJson) 
-                ? prestasiListJson 
+            prestasiListData = Array.isArray(prestasiListJson) 
+              ? prestasiListJson 
+              : Array.isArray(prestasiListJson?.data) 
+                ? prestasiListJson.data 
                 : []
             
             // Jika ada pagination dan ada halaman lebih, ambil semua halaman
-            const pagination = prestasiListJson?.pagination
-            if (pagination && pagination.last_page > 1) {
-              const allPages = await Promise.allSettled(
-                Array.from({ length: pagination.last_page - 1 }, (_, i) => 
-                  fetch(`https://api.alkapro.id/api/v1/prestasi/list?page=${i + 2}`, {
-                    headers: { Accept: 'application/json' },
-                    cache: 'no-store',
-                  }).then(res => res.ok ? res.json() : null)
+            if (!Array.isArray(prestasiListJson)) {
+              const pagination = prestasiListJson?.pagination
+              if (pagination && pagination.last_page > 1) {
+                const allPages = await Promise.allSettled(
+                  Array.from({ length: pagination.last_page - 1 }, (_, i) => 
+                    fetch(`https://api.alkapro.id/api/v1/prestasi/list?page=${i + 2}`, {
+                      headers: { Accept: 'application/json' },
+                      cache: 'no-store',
+                    }).then(async (res) => {
+                      if (res.ok) {
+                        const json = await res.json() as PrestasiApiResponse | PrestasiApiItem[]
+                        return Array.isArray(json) ? json : json?.data || []
+                      }
+                      return null
+                    })
+                  )
                 )
-              )
-              
-              allPages.forEach((pageRes) => {
-                if (pageRes.status === 'fulfilled' && pageRes.value?.data) {
-                  prestasiListData = [...prestasiListData, ...pageRes.value.data]
-                }
-              })
+                
+                allPages.forEach((pageRes) => {
+                  if (pageRes.status === 'fulfilled' && Array.isArray(pageRes.value)) {
+                    prestasiListData = [...prestasiListData, ...pageRes.value]
+                  }
+                })
+              }
             }
             
             console.log('✅ Prestasi list data fetched:', prestasiListData.length, 'items')
@@ -83,7 +119,7 @@ export default function PrestasiSwiper() {
         const byCat = byCatRes.status === 'fulfilled' ? byCatRes.value.data : []
         
         // Convert prestasi list data ke format yang sama dengan Post
-        const prestasiListConverted: Post[] = prestasiListData.map((p: any) => ({
+        const prestasiListConverted: Post[] = prestasiListData.map((p: PrestasiApiItem) => ({
           id: p.id,
           title: p.title,
           slug: p.slug || `prestasi-${p.id}`,
@@ -102,21 +138,20 @@ export default function PrestasiSwiper() {
         // Gabungkan semua data: prestasi/list diutamakan, lalu news/articles
         const combined: Post[] = [...prestasiListConverted, ...news, ...articles, ...byCat]
 
-        const filtered = combined.filter((p: any) => {
-          const rawTags = p?.tags
-          const tagsArr: string[] = Array.isArray(rawTags)
-            ? rawTags.map((t: any) => typeof t === 'string' ? t : (t?.name || t?.title || t?.slug || '')).filter(Boolean)
-            : typeof rawTags === 'string'
-              ? rawTags.split(/[,;]+/).map((s: string) => s.trim())
-              : []
+        const filtered = combined.filter((p: Post) => {
+          // Post.tags sudah bertipe string[], jadi langsung gunakan
+          const tagsArr: string[] = Array.isArray(p?.tags) 
+            ? p.tags.filter((tag): tag is string => typeof tag === 'string' && Boolean(tag))
+            : []
+          
           const hasPrestasiTag = tagsArr.some((tag: string) => /prestasi/i.test(tag))
           const category = String(p?.category || '').toLowerCase()
           const hasPrestasiCategory = /prestasi|achievement/i.test(category)
-          const hasImage = !!(p?.image || p?.thumbnail || p?.featured_image)
+          const hasImage = !!(p?.image)
           return hasImage && (hasPrestasiTag || hasPrestasiCategory)
         })
         const mapped = filtered
-          .map((p: any) => ({ url: getImageUrl(p.image || p.thumbnail || p.featured_image), title: p.title }))
+          .map((p: Post) => ({ url: getImageUrl(p.image), title: p.title }))
           .filter((it: PrestasiImage) => !!it.url)
 
         // Deduplicate by url
