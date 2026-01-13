@@ -70,25 +70,99 @@ export default function PrestasiPage() {
       setBeritaLoading(true)
       
       try {
-        // Fetch prestasi
-        const prestasiResponse = await fetch('https://api.alkapro.id/api/v1/news?tags=prestasi')
-        if (prestasiResponse.ok) {
-          const prestasiData = await prestasiResponse.json()
-          if (prestasiData?.data?.length > 0) {
-            const converted = prestasiData.data.map((news: any) => ({
-              id: news.id,
-              title: news.title,
-              featured_image: news.image,
-              excerpt: news.subtitle?.replace(/<[^>]*>/g, '') || '',
-              published_at: news.published_at,
-              // Handle both string and array formats for tags
-              tags: Array.isArray(news.tags) ? news.tags : (news.tags ? [news.tags] : [])
-            }))
-            setPrestasiBeritaData(converted)
-          } else {
-            setPrestasiBeritaData(fallbackPrestasi)
+        // Fungsi untuk mengambil semua halaman dari endpoint news
+        const fetchAllNewsPages = async () => {
+          let allItems: any[] = []
+          let currentPage = 1
+          let hasMore = true
+          
+          while (hasMore) {
+            try {
+              const response = await fetch(`/api/proxy/news?page=${currentPage}`, { cache: 'no-store' })
+              if (!response.ok) {
+                console.error(`❌ News page ${currentPage} response not ok:`, response.status)
+                break
+              }
+              
+              const data = await response.json()
+              console.log(`📄 News page ${currentPage} response:`, data)
+              
+              const items = Array.isArray(data?.data) ? data.data : (Array.isArray(data) ? data : [])
+              
+              if (items.length === 0) {
+                hasMore = false
+              } else {
+                allItems = [...allItems, ...items]
+                
+                // Cek apakah ada halaman berikutnya
+                const lastPage = data?.last_page
+                console.log(`📊 News page ${currentPage}: last_page=${lastPage}, items=${items.length}`)
+                if (lastPage) {
+                  hasMore = currentPage < lastPage
+                  currentPage++
+                } else {
+                  // Jika tidak ada pagination info, batasi maksimal 10 halaman
+                  if (currentPage >= 10) {
+                    hasMore = false
+                  } else {
+                    currentPage++
+                  }
+                }
+              }
+            } catch (error) {
+              console.error(`❌ Error fetching news page ${currentPage}:`, error)
+              hasMore = false
+            }
           }
+          
+          console.log(`✅ News total items fetched:`, allItems.length)
+          return allItems
+        }
+        
+        // Ambil semua data dari endpoint news
+        const allNewsItems = await fetchAllNewsPages()
+        
+        // Filter berdasarkan tag "prestasi" atau "Prestasi" (case insensitive)
+        // Tapi exclude yang tag "ujian tahfidz" atau "tahfidz"
+        const prestasiFiltered = allNewsItems.filter((news: any) => {
+          const tags = Array.isArray(news.tags) ? news.tags : (news.tags ? [news.tags] : [])
+          
+          // Cek apakah ada tag yang mengandung "prestasi" (case insensitive)
+          const hasPrestasiTag = tags.some((tag: string) => {
+            const normalizedTag = String(tag).toLowerCase().trim()
+            return normalizedTag.includes('prestasi')
+          })
+          
+          // Exclude yang tag "ujian tahfidz" atau "tahfidz"
+          const hasTahfidzTag = tags.some((tag: string) => {
+            const normalizedTag = String(tag).toLowerCase().trim()
+            return normalizedTag.includes('ujian tahfidz') || normalizedTag.includes('tahfidz')
+          })
+          
+          return hasPrestasiTag && !hasTahfidzTag
+        })
+        
+        console.log(`✅ Prestasi filtered items:`, prestasiFiltered.length, 'dari', allNewsItems.length, 'total news')
+        
+        if (prestasiFiltered.length > 0) {
+          const converted = prestasiFiltered.map((news: any) => ({
+            id: news.id,
+            title: news.title,
+            featured_image: news.image,
+            excerpt: news.subtitle?.replace(/<[^>]*>/g, '') || '',
+            published_at: news.published_at,
+            // Handle both string and array formats for tags
+            tags: Array.isArray(news.tags) ? news.tags : (news.tags ? [news.tags] : [])
+          }))
+          // Sort by date (terbaru dulu)
+          converted.sort((a, b) => {
+            const dateA = new Date(a.published_at || 0).getTime()
+            const dateB = new Date(b.published_at || 0).getTime()
+            return dateB - dateA
+          })
+          setPrestasiBeritaData(converted)
         } else {
+          console.log('⚠️ No prestasi data found, using fallback')
           setPrestasiBeritaData(fallbackPrestasi)
         }
 
@@ -725,21 +799,8 @@ export default function PrestasiPage() {
                 `}</style>
 
                 <div className="prestasi-carousel">
-                  {/* Filter hanya prestasi (bukan ujian tahfidz) */}
+                  {/* Data sudah difilter di fetch, langsung tampilkan semua */}
                   {prestasiData
-                    .filter(post => {
-                      // Pastikan tags ada
-                      if (!post.tags || post.tags.length === 0) {
-                        return false
-                      }
-                      
-                      return post.tags.some(tag => 
-                        tag.toLowerCase().includes('prestasi') && 
-                        !tag.toLowerCase().includes('ujian tahfidz') &&
-                        !tag.toLowerCase().includes('tahfidz')
-                      )
-                    })
-                    .slice(0, 20)
                     .map((post) => {
                       console.log('🔍 Rendering prestasi post:', post.title, 'Tags:', post.tags)
                       
