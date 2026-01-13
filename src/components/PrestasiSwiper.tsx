@@ -83,14 +83,20 @@ export default function PrestasiSwiper() {
         const byCat = byCatRes.status === 'fulfilled' ? byCatRes.value.data : []
         
         // Convert prestasi list data ke format yang sama dengan Post
-        const prestasiListConverted = prestasiListData.map((p: any) => ({
+        const prestasiListConverted: Post[] = prestasiListData.map((p: any) => ({
           id: p.id,
           title: p.title,
-          image: p.image,
-          thumbnail: p.image,
-          featured_image: p.image,
-          tags: Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : ['prestasi']),
+          slug: p.slug || `prestasi-${p.id}`,
+          content: p.content || p.subtitle || '',
+          subtitle: p.subtitle || '',
+          image: p.image || '',
           category: p.category || 'achievement',
+          type: (p.type || 'news') as 'news' | 'article',
+          author: p.author || '',
+          tags: Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : ['prestasi']),
+          meta_description: p.meta_description || p.subtitle || '',
+          published_at: p.published_at || p.created_at || new Date().toISOString(),
+          read_time: p.read_time || 0,
         }))
 
         // Gabungkan semua data: prestasi/list diutamakan, lalu news/articles
