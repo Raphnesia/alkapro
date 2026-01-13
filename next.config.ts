@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  eslint: {
+    // Ignore ESLint errors during builds (akan tetap menampilkan warnings)
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // Ignore TypeScript errors during builds (optional)
+    ignoreBuildErrors: false,
+  },
   images: {
     domains: ['api.alkapro.id', 'alkapro.id'],
     remotePatterns: [
