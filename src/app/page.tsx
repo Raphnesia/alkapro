@@ -180,12 +180,29 @@ export default function Home() {
 
     const fetchPopupSettings = async () => {
       try {
-        const settings = await popupApi.getSettings()
+        // Fetch from API - response format: { success: true, data: {...} }
+        // Using proxy to avoid CORS issues
+        const response = await fetch('/api/proxy/v1/popup-settings', { cache: 'no-store' })
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+
+        const result = await response.json()
         
         if (!mounted) return
 
-        // Check if popup is active
-        if (!settings.is_active) {
+        // Check if API response is successful
+        if (!result.success) {
+          console.warn('Popup API returned success: false')
+          setPopupSettings(null)
+          return
+        }
+
+        const settings = result.data
+
+        // Handle case when no active popup: { is_active: false, image_url: "" }
+        if (!settings || !settings.is_active || !settings.image_url || settings.image_url === '') {
           setPopupSettings(null)
           return
         }
@@ -205,7 +222,7 @@ export default function Home() {
         // Check if should show on first visit only
         if (settings.show_on_first_visit_only) {
           const hasSeenPopup = localStorage.getItem('has_seen_popup')
-          if (hasSeenPopup) {
+          if (hasSeenPopup === 'true') {
             return
           }
         }
