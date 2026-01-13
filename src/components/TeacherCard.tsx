@@ -91,7 +91,7 @@ export const TeacherCard = ({ teacher, index }: TeacherCardProps) => {
       <img 
         draggable={false} 
         alt="banner" 
-        src="https://www.ums.ac.id/__image__/uploads/KZ4tligbcEdhZFxCLan8FNQMirVQuIYtCOMHLOqd.svg" 
+        src="https://www.ums.ac.id/__gambars__/uploads/0fBN8DR7wfvX1hQ0C3rIHObQLyjDvYC2bt8IXxYN.webp" 
         className="w-full absolute inset-0 object-cover h-full opacity-50" 
       />
       
