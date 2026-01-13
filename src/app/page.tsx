@@ -182,8 +182,8 @@ export default function Home() {
       try {
         console.log('🔍 Fetching popup settings from API...')
         // Fetch from API - response format: { success: true, data: {...} }
-        // Using proxy to avoid CORS issues
-        const response = await fetch('/api/proxy/v1/popup-settings', { cache: 'no-store' })
+        // Using proxy to avoid CORS issues (proxy already includes /v1 in base URL)
+        const response = await fetch('/api/proxy/popup-settings', { cache: 'no-store' })
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -205,15 +205,34 @@ export default function Home() {
         console.log('📋 Popup settings data:', settings)
 
         // Handle case when no active popup: { is_active: false, image_url: "" }
-        if (!settings || !settings.is_active || !settings.image_url || settings.image_url === '') {
-          console.warn('⚠️ Popup is not active or has no image_url')
+        if (!settings || !settings.is_active) {
+          console.warn('⚠️ Popup is not active')
+          setPopupSettings(null)
+          return
+        }
+        
+        // Check if image_url exists (either image_url or image_url_full)
+        const hasImageUrl = settings.image_url || settings.image_url_full
+        if (!hasImageUrl || hasImageUrl === '') {
+          console.warn('⚠️ Popup has no image_url')
           setPopupSettings(null)
           return
         }
 
         // Use image_url_full if available, otherwise use image_url
-        const imageUrl = settings.image_url_full || settings.image_url
-        console.log('🖼️ Using image URL:', imageUrl)
+        let imageUrl = settings.image_url_full || settings.image_url
+        console.log('🖼️ Original image URL from API:', imageUrl)
+        
+        // Add cache busting parameter to ensure fresh image (only if URL is valid)
+        try {
+          const url = new URL(imageUrl)
+          url.searchParams.set('v', settings.updated_at || Date.now().toString())
+          imageUrl = url.toString()
+        } catch (e) {
+          // If URL parsing fails, use original URL
+          console.warn('⚠️ Could not parse image URL for cache busting, using original:', imageUrl)
+        }
+        console.log('🖼️ Using image URL (with cache busting):', imageUrl)
 
         // Check if popup has expired
         if (settings.expires_at) {
@@ -226,14 +245,13 @@ export default function Home() {
         }
 
         // Set settings with the correct image URL
-        setPopupSettings({
+        const finalSettings = {
           ...settings,
           image_url: imageUrl
-        })
-        console.log('✅ Popup settings set successfully:', {
-          ...settings,
-          image_url: imageUrl
-        })
+        }
+        setPopupSettings(finalSettings)
+        console.log('✅ Popup settings set successfully:', finalSettings)
+        console.log('🖼️ Final image URL that will be used:', finalSettings.image_url)
 
         // Check if should show on first visit only
         if (settings.show_on_first_visit_only) {
@@ -253,20 +271,12 @@ export default function Home() {
           }
         }, delay)
       } catch (error) {
-        console.error('Error fetching popup settings:', error)
-        // Fallback to default popup if API fails
-        setPopupSettings({
-          is_active: true,
-          image_url: '/popupimage.jpg',
-          image_alt: 'Popup Image',
-          show_on_first_visit_only: false,
-          delay_before_show: 0,
-        })
-        setTimeout(() => {
-          if (mounted) {
-            setShowPopup(true)
-          }
-        }, 1000)
+        console.error('❌ Error fetching popup settings:', error)
+        // Don't show popup if API fails - user should fix the API issue
+        if (mounted) {
+          setPopupSettings(null)
+          console.warn('⚠️ Popup will not be shown due to API error. Please check API connection.')
+        }
       }
     }
 
@@ -533,25 +543,37 @@ export default function Home() {
                 }}
               >
                 <img 
+                  key={`popup-img-${popupSettings.id || popupSettings.image_url}`}
                   src={popupSettings.image_url} 
                   alt={popupSettings.image_alt || 'Popup Image'} 
                   className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
-                  onLoad={() => console.log('✅ Popup image loaded:', popupSettings.image_url)}
+                  onLoad={() => console.log('✅ Popup image loaded successfully:', popupSettings.image_url)}
                   onError={(e) => {
                     console.error('❌ Popup image failed to load:', popupSettings.image_url)
                     console.error('Error details:', e)
+                    // Try to reload with cache busting
+                    const img = e.currentTarget
+                    const url = new URL(popupSettings.image_url)
+                    url.searchParams.set('t', Date.now().toString())
+                    img.src = url.toString()
                   }}
                 />
               </a>
             ) : (
               <img 
+                key={`popup-img-${popupSettings.id || popupSettings.image_url}`}
                 src={popupSettings.image_url} 
                 alt={popupSettings.image_alt || 'Popup Image'} 
                 className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
-                onLoad={() => console.log('✅ Popup image loaded:', popupSettings.image_url)}
+                onLoad={() => console.log('✅ Popup image loaded successfully:', popupSettings.image_url)}
                 onError={(e) => {
                   console.error('❌ Popup image failed to load:', popupSettings.image_url)
                   console.error('Error details:', e)
+                  // Try to reload with cache busting
+                  const img = e.currentTarget
+                  const url = new URL(popupSettings.image_url)
+                  url.searchParams.set('t', Date.now().toString())
+                  img.src = url.toString()
                 }}
                 onClick={() => {
                   console.log('❌ Closing popup')
