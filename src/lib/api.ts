@@ -284,6 +284,7 @@ export interface PopupSettings {
   id?: number;
   is_active: boolean;
   image_url: string;
+  image_url_full?: string; // Full URL from backend
   image_alt?: string;
   link_url?: string;
   open_in_new_tab?: boolean;

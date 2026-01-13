@@ -180,6 +180,7 @@ export default function Home() {
 
     const fetchPopupSettings = async () => {
       try {
+        console.log('🔍 Fetching popup settings from API...')
         // Fetch from API - response format: { success: true, data: {...} }
         // Using proxy to avoid CORS issues
         const response = await fetch('/api/proxy/v1/popup-settings', { cache: 'no-store' })
@@ -189,23 +190,30 @@ export default function Home() {
         }
 
         const result = await response.json()
+        console.log('📦 Popup API response:', result)
         
         if (!mounted) return
 
         // Check if API response is successful
         if (!result.success) {
-          console.warn('Popup API returned success: false')
+          console.warn('⚠️ Popup API returned success: false')
           setPopupSettings(null)
           return
         }
 
         const settings = result.data
+        console.log('📋 Popup settings data:', settings)
 
         // Handle case when no active popup: { is_active: false, image_url: "" }
         if (!settings || !settings.is_active || !settings.image_url || settings.image_url === '') {
+          console.warn('⚠️ Popup is not active or has no image_url')
           setPopupSettings(null)
           return
         }
+
+        // Use image_url_full if available, otherwise use image_url
+        const imageUrl = settings.image_url_full || settings.image_url
+        console.log('🖼️ Using image URL:', imageUrl)
 
         // Check if popup has expired
         if (settings.expires_at) {
@@ -217,7 +225,15 @@ export default function Home() {
           }
         }
 
-        setPopupSettings(settings)
+        // Set settings with the correct image URL
+        setPopupSettings({
+          ...settings,
+          image_url: imageUrl
+        })
+        console.log('✅ Popup settings set successfully:', {
+          ...settings,
+          image_url: imageUrl
+        })
 
         // Check if should show on first visit only
         if (settings.show_on_first_visit_only) {
@@ -229,8 +245,10 @@ export default function Home() {
 
         // Show popup with delay if specified
         const delay = settings.delay_before_show || 0
+        console.log(`⏱️ Will show popup after ${delay}ms delay`)
         setTimeout(() => {
           if (mounted) {
+            console.log('✅ Showing popup now')
             setShowPopup(true)
           }
         }, delay)
@@ -490,6 +508,7 @@ export default function Home() {
           <div className="relative animate-fade-in">
             <button 
               onClick={() => {
+                console.log('❌ Closing popup')
                 setShowPopup(false)
                 // Mark as seen if first visit only
                 if (popupSettings.show_on_first_visit_only) {
@@ -506,6 +525,7 @@ export default function Home() {
                 target={popupSettings.open_in_new_tab ? '_blank' : '_self'}
                 rel={popupSettings.open_in_new_tab ? 'noopener noreferrer' : undefined}
                 onClick={() => {
+                  console.log('🔗 Opening popup link:', popupSettings.link_url)
                   setShowPopup(false)
                   if (popupSettings.show_on_first_visit_only) {
                     localStorage.setItem('has_seen_popup', 'true')
@@ -516,6 +536,11 @@ export default function Home() {
                   src={popupSettings.image_url} 
                   alt={popupSettings.image_alt || 'Popup Image'} 
                   className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
+                  onLoad={() => console.log('✅ Popup image loaded:', popupSettings.image_url)}
+                  onError={(e) => {
+                    console.error('❌ Popup image failed to load:', popupSettings.image_url)
+                    console.error('Error details:', e)
+                  }}
                 />
               </a>
             ) : (
@@ -523,7 +548,13 @@ export default function Home() {
                 src={popupSettings.image_url} 
                 alt={popupSettings.image_alt || 'Popup Image'} 
                 className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-pointer"
+                onLoad={() => console.log('✅ Popup image loaded:', popupSettings.image_url)}
+                onError={(e) => {
+                  console.error('❌ Popup image failed to load:', popupSettings.image_url)
+                  console.error('Error details:', e)
+                }}
                 onClick={() => {
+                  console.log('❌ Closing popup')
                   setShowPopup(false)
                   if (popupSettings.show_on_first_visit_only) {
                     localStorage.setItem('has_seen_popup', 'true')
