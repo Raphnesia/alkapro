@@ -1,0 +1,163 @@
+/* Islamic Modern Prestasi Swiper Styles */
+.prestasi-swiper-coverflow {
+  position: relative;
+  padding: 40px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Swiper Slides */
+.prestasi-swiper-coverflow .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 450px;
+  height: auto;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Simple Image Design */
+
+/* Direct Image Styling */
+.prestasi-swiper-coverflow .swiper-slide img {
+  transition: transform 0.3s ease;
+}
+
+.prestasi-swiper-coverflow .swiper-slide:hover img {
+  transform: scale(1.05);
+}
+
+/* Swiper Pagination */
+.prestasi-swiper-coverflow .swiper-pagination {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.prestasi-swiper-coverflow .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.prestasi-swiper-coverflow .swiper-pagination-bullet-active {
+  background: #3b82f6;
+  transform: scale(1.2);
+}
+
+/* Navigation Buttons */
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.swiper-button-prev-custom {
+  left: -25px;
+}
+
+.swiper-button-next-custom {
+  right: -25px;
+}
+
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+  background: #3b82f6;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.swiper-button-prev-custom svg,
+.swiper-button-next-custom svg {
+  width: 20px;
+  height: 20px;
+  color: #374151;
+  transition: color 0.3s ease;
+}
+
+.swiper-button-prev-custom:hover svg,
+.swiper-button-next-custom:hover svg {
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .prestasi-swiper-coverflow {
+    padding: 2rem 0;
+  }
+  
+  .prestasi-swiper-coverflow .swiper-slide {
+    width: 350px !important;
+  }
+  
+  .prestasi-swiper-coverflow .swiper-slide img {
+    height: 480px !important;
+  }
+  
+  .swiper-button-prev-custom,
+  .swiper-button-next-custom {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .swiper-button-prev-custom {
+    left: -20px;
+  }
+  
+  .swiper-button-next-custom {
+    right: -20px;
+  }
+  
+  .swiper-button-prev-custom svg,
+  .swiper-button-next-custom svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .prestasi-swiper-coverflow .swiper-slide {
+    width: 320px !important;
+  }
+  
+  .prestasi-swiper-coverflow .swiper-slide img {
+    height: 450px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .prestasi-swiper-coverflow .swiper-slide {
+    width: 330px !important;
+  }
+  
+  .swiper-button-prev-custom,
+  .swiper-button-next-custom {
+    display: none;
+  }
+  
+  .prestasi-swiper-coverflow {
+    padding: 3rem 0 4rem 0;
+  }
+}
+
+/* Focus States for Accessibility */
+.swiper-button-prev-custom:focus,
+.swiper-button-next-custom:focus {
+  outline: 3px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 3px;
+}
