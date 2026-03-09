@@ -10,6 +10,7 @@ import FacilitiesSwiper from '@/components/FacilitiesSwiper'
 import PrestasiSwiper from '@/components/PrestasiSwiper'
 import ProgramKhususSection from '@/components/ProgramKhususSection'
 import BeritaKegiatanSection from '@/components/BeritaKegiatanSection'
+import RamadhanMarquee from '@/components/RamadhanMarquee'
 import KegiatanSekolahSection from '@/components/KegiatanSekolahSection'
 import TestimoniSection from '@/components/TestimoniSection'
 import WhyChooseUsSection from '@/components/WhyChooseUsSection'
@@ -800,7 +801,8 @@ export default function Home() {
         <AlkaproEcosystemSection />
       </ScrollReveal>
 
-      
+      {/* Ramadhan Marquee */}
+      <RamadhanMarquee />
 
       {/* Prestasi Siswa Section - Modern Futuristic Design */}
       <div className={`py-24 bg-gradient-to-br ${prestasiGradients[currentPrestasiGradient]} relative overflow-hidden transition-all duration-1000`}>
@@ -945,18 +947,6 @@ export default function Home() {
       {/* YouTube Section */}
       <ScrollReveal delay={200}>
         <YouTubeSection />
-      </ScrollReveal>
-      
-      {/* Background Footer Section */}
-      <ScrollReveal delay={300}>
-        <div 
-          className="w-full h-80 md:h-64 lg:h-[400px] md:h-[600px] xl:h-[1200px] -mt-20 md:-mt-32 xl:-mt-56 -mb-6 bg-no-repeat bg-center bg-cover relative z-20"
-          style={{
-            backgroundImage: 'url(/backgroundatasfooter.png)',
-            backgroundColor: 'transparent'
-          }}
-        >
-        </div>
       </ScrollReveal>
 
       

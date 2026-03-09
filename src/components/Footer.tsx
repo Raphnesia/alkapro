@@ -3,6 +3,7 @@
 import React from 'react'
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
 import { useFooter } from '@/hooks/useNavigation'
+import Marquee from 'react-fast-marquee'
 
 interface FooterProps {
   marginTop?: string
@@ -80,7 +81,51 @@ const Footer: React.FC<FooterProps> = ({ marginTop = 'mt-0' }) => {
   const lainnyaLinks = footerData?.links?.lainnya || [];
 
   return (
-    <footer className={`bg-gradient-to-br from-blue-900 via-blue-800 to-green-700 text-white rounded-t-3xl ${marginTop} pt-16 relative z-20 overflow-hidden`}>
+    <footer className={`bg-gradient-to-br from-blue-900 via-blue-800 to-green-700 text-white rounded-t-3xl ${marginTop} -mt-2 pt-16 relative z-30 overflow-hidden`}>
+      {/* Footer Text Slider */}
+      <div className="py-12 xl:py-16 overflow-hidden border-b border-white/10 relative z-30">
+        <div className="footer-text-slider-container">
+          <Marquee gradient={false} speed={50}>
+            <div className="flex items-center gap-x-8 mx-8">
+              <span className="text-4xl">🎓</span>
+              <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white whitespace-nowrap" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+                Alkapro Digital School
+              </div>
+            </div>
+            <div className="flex items-center gap-x-8 mx-8">
+              <span className="text-4xl">�</span>
+              <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white whitespace-nowrap" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+                Marhaban Ya Ramadhan
+              </div>
+            </div>
+            <div className="flex items-center gap-x-8 mx-8">
+              <span className="text-4xl">🕌</span>
+              <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white whitespace-nowrap" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+                Selamat Hari Raya Idul Fitri 1447H
+              </div>
+            </div>
+            <div className="flex items-center gap-x-8 mx-8">
+              <span className="text-4xl">🎓</span>
+              <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white whitespace-nowrap" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+                Alkapro Digital School
+              </div>
+            </div>
+            <div className="flex items-center gap-x-8 mx-8">
+              <span className="text-4xl">🌙</span>
+              <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white whitespace-nowrap" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+                Marhaban Ya Ramadhan
+              </div>
+            </div>
+            <div className="flex items-center gap-x-8 mx-8">
+              <span className="text-4xl">🕌</span>
+              <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white whitespace-nowrap" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+                Selamat Hari Raya Idul Fitri 1447H
+              </div>
+            </div>
+          </Marquee>
+        </div>
+      </div>
+      
       {/* Geometric Decoration */}
       <GeometricDecoration />
       
