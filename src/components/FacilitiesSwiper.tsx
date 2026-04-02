@@ -74,9 +74,18 @@ export default function FacilitiesSwiper({ items = [] as FacilityItem[] }: { ite
                     <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/15 to-transparent" />
                   </div>
 
-                {/* Content (no glass/blur) */}
+                  {/* Blue gradient overlay on hover - top transparent to bottom solid */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+                    style={{
+                      background: 'linear-gradient(rgba(59, 130, 246, 0) 50%, rgba(59, 130, 246, 0.7) 100%)',
+                      willChange: 'auto'
+                    }}
+                  />
+
+                {/* Content with fade animation */}
                 <div className="relative z-10 h-full p-6 flex flex-col justify-end">
-                  <div className="rounded-xl px-4 py-3">
+                  <div className="rounded-xl px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out">
                     <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-white tracking-tight drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">{item.name}</h3>
                     <p className="text-white/90 text-sm md:text-base leading-relaxed mt-1 drop-shadow-[0_3px_8px_rgba(0,0,0,0.55)]">{item.description}</p>
                   </div>

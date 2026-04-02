@@ -17,6 +17,7 @@ import WhyChooseUsSection from '@/components/WhyChooseUsSection'
 import SocialMediaFeedSection from '@/components/SocialMediaFeedSection'
 import AlkaproEcosystemSection from '@/components/AlkaproEcosystemSection'
 import YouTubeSection from '@/components/YouTubeSection'
+import RobloxGameSection from '@/components/RobloxGameSection'
 import { useI18n } from '@/hooks/useI18n'
 import { homeApi, HomeSection, InstagramApiPost, SocialSettings, popupApi, PopupSettings } from '@/lib/api'
 
@@ -938,6 +939,18 @@ export default function Home() {
       {/* Testimoni Section */}
       <ScrollReveal delay={300}>
         <TestimoniSection />
+      </ScrollReveal>
+
+      {/* Roblox Game Section */}
+      <ScrollReveal delay={200}>
+        <RobloxGameSection 
+          title="Jelajahi Sekolah Kita"
+          highlightedText="dengan Roblox Game"
+          description="Experience our school virtually through an immersive Roblox game. Walk through our facilities, meet teachers, and get a feel of school life before you visit!"
+          youtubeVideoId="1B0H2Bf10uM"
+          registerLink="https://www.roblox.com/id/games/77408976822302/The-Halls-Of-Al-Kautsar"
+          learnMoreLink="/profil"
+        />
       </ScrollReveal>
       
       <ScrollReveal delay={200}>

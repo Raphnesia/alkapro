@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Marquee } from './MagicUIAnimations'
-import { ScrollReveal } from './ScrollReveal'
 import { homeApi, HomeSection } from '@/lib/api'
+import Beams from './Beams'
 
 interface TestimoniData {
   nama: string
@@ -64,8 +63,34 @@ const fallbackTestimoniData: TestimoniData[] = [
   }
 ]
 
+// Fixed positions for each card with random spread - avoiding center
+const generateCardPositions = () => {
+  const basePositions = [
+    // Top corners - far from center
+    { x: -800, y: -500 },
+    { x: 800, y: -500 },
+    // Middle sides - far left and right
+    { x: -1000, y: -200 },
+    { x: 1000, y: -200 },
+    { x: -1000, y: 200 },
+    { x: 1000, y: 200 },
+    // Bottom corners - far from center
+    { x: -800, y: 500 },
+    { x: 800, y: 500 },
+  ]
+  
+  return basePositions.map(pos => ({
+    x: pos.x + (Math.random() * 100 - 50),
+    y: pos.y + (Math.random() * 100 - 50),
+  }))
+}
+
+const cardPositions = generateCardPositions()
+
 export default function TestimoniSection() {
   const [testimoniData, setTestimoniData] = useState<TestimoniData[]>(fallbackTestimoniData)
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(0)
+  const [cameraPosition, setCameraPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     let mounted = true
@@ -82,212 +107,140 @@ export default function TestimoniSection() {
             avatar: t.avatar || '⭐',
           })))
         }
-      } catch (_) {
+      } catch {
         // keep fallback
       }
     })()
     return () => { mounted = false }
   }, [])
 
-  const leftTestimonis = testimoniData.slice(0, 4)
-  const rightTestimonis = testimoniData.slice(4, 8)
+  // Auto cycle through cards with camera pan
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHighlightedIndex((prev) => {
+        const nextIndex = (prev + 1) % testimoniData.length
+        
+        // Pan camera to next card position
+        const nextPos = cardPositions[nextIndex % cardPositions.length]
+        setCameraPosition({
+          x: -nextPos.x,
+          y: -nextPos.y
+        })
+        
+        return nextIndex
+      })
+    }, 4000) // Change every 4 seconds
+
+    // Initialize camera to first card
+    const firstPos = cardPositions[0]
+    setCameraPosition({
+      x: -firstPos.x,
+      y: -firstPos.y
+    })
+
+    return () => clearInterval(interval)
+  }, [testimoniData.length])
 
   return (
-    <section className="py-12 bg-gray-50 relative overflow-hidden">
-      {/* Decorative Illustration */}
-      <div className="shape-illustration bottom-left">
-        <img src="/ilustrasi/puteri.png" alt="Student Testimonial Illustration" />
-      </div>
-      
-      <div className="container mx-auto px-4 max-w-7xl relative z-10">
-        {/* Modern Bento Grid Container */}
-        <ScrollReveal delay={200}>
-          <div className="bg-primary rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
-            <div className="grid lg:grid-cols-2 min-h-[300px]">
-              {/* Left Content */}
-              <ScrollReveal delay={300} direction="left">
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                  className="p-8 flex flex-col justify-center bg-gradient-to-br from-blue-600 to-blue-800"
-                >
-                  <div className="space-y-8">
-                    {/* Badge */}
-                    <ScrollReveal delay={400}>
-                      <div className="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-full text-sm font-medium mb-6">
-                        <span className="mr-2">⭐</span>
-                        5000+ Orang Tua Puas
-                      </div>
-                    </ScrollReveal>
+    <section className="relative overflow-hidden bg-white">
+      {/* Background Container - Full Screen with Beams */}
+      <div className="relative isolate min-h-screen w-full overflow-hidden">
+        {/* Beams Background */}
+        <div className="absolute inset-0">
+          <Beams
+            beamWidth={3}
+            beamHeight={30}
+            beamNumber={20}
+            lightColor="#14dee1"
+            speed={2}
+            noiseIntensity={1.75}
+            scale={0.2}
+            rotation={30}
+          />
+        </div>
 
-                    {/* Main Heading */}
-                    <ScrollReveal delay={500}>
-                      <div className="space-y-6">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight font-quicksand">
-                          Apa yang dikatakan para Abi dan Bunda tentang Al Kautsar?
-                        </h2>
-                        
-                        <p className="text-lg text-white leading-relaxed font-quicksand">
-                          Kami bangga dengan kepercayaan para orang tua yang telah menyekolahkan putra-putrinya di SMP Muhammadiyah Al Kautsar PK Kartasura. Berikut testimoni dan pengalaman mereka.
-                        </p>
-                      </div>
-                    </ScrollReveal>
-
-                    {/* Decorative Element */}
-                    <ScrollReveal delay={600}>
-                      <div className="flex items-center space-x-4">
-                        <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                        <div className="w-8 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
-                        <div className="w-4 h-1 bg-gradient-to-r from-pink-500 to-red-500 rounded-full"></div>
-                      </div>
-                    </ScrollReveal>
+        {/* Cards Container with Camera Pan */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            x: cameraPosition.x,
+            y: cameraPosition.y,
+          }}
+          transition={{
+            duration: 1.2,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }}
+        >
+          {testimoniData.map((testimoni, idx) => {
+            const pos = cardPositions[idx % cardPositions.length]
+            const isHighlighted = idx === highlightedIndex
+            
+            return (
+              <motion.div
+                key={idx}
+                className="absolute origin-center overflow-hidden rounded-xl bg-white p-5 shadow-lg ring-1 ring-black/5"
+                style={{
+                  left: `calc(50% + ${pos.x}px)`,
+                  top: `calc(50% + ${pos.y}px)`,
+                  width: '360px',
+                  transform: 'translate(-50%, -50%)'
+                }}
+                animate={{
+                  scale: isHighlighted ? 1.15 : 0.85,
+                  opacity: isHighlighted ? 1 : 0.3,
+                  zIndex: isHighlighted ? 50 : 1,
+                }}
+                transition={{
+                  duration: 0.6,
+                  ease: 'easeOut',
+                }}
+              >
+                <div className="flex h-full flex-col justify-between">
+                  <div>
+                    <p className="text-sm leading-relaxed text-neutral-600">
+                      {testimoni.testimoni}
+                    </p>
                   </div>
-                </motion.div>
-              </ScrollReveal>
-
-              {/* Right Content - Responsive Marquee */}
-              <ScrollReveal delay={400} direction="right">
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 h-[300px]"
-                >
-                  {/* Mobile: Single Marquee */}
-                  <div className="h-full w-full lg:hidden">
-                    <Marquee
-                      className="h-full w-full"
-                      pauseOnHover
-                      vertical
-                      repeat={true}
-                    >
-                      {testimoniData.map((testimoni, index) => (
-                        <div
-                          key={index}
-                          className="bg-white rounded-2xl p-3 shadow-lg hover:shadow-xl transition-all duration-300 mx-0.5 my-1 w-full border border-gray-100 backdrop-blur-sm"
-                        >
-                          {/* Header */}
-                          <div className="flex items-center space-x-2 mb-3">
-                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm">
-                              {testimoni.avatar}
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-gray-800 text-xs">{testimoni.nama}</h4>
-                              <p className="text-xs text-gray-500">{testimoni.tahun}</p>
-                            </div>
-                          </div>
-                          
-                          {/* Testimoni Text */}
-                          <p className="text-gray-600 text-xs leading-relaxed line-clamp-3">
-                            {testimoni.testimoni}
-                          </p>
-                          
-                          {/* Rating Stars */}
-                          <div className="flex items-center mt-2 space-x-1">
-                            {[...Array(5)].map((_, i) => (
-                              <span key={i} className="text-yellow-400 text-xs">⭐</span>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </Marquee>
+                  <div className="mt-4 flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-xl">
+                      {testimoni.avatar}
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-neutral-700 block">{testimoni.nama}</span>
+                      <span className="text-xs text-neutral-500">{testimoni.tahun}</span>
+                    </div>
                   </div>
+                </div>
+              </motion.div>
+            )
+          })}
+        </motion.div>
 
-                  {/* Desktop: Dual Dynamic Marquee */}
-                  <div className="hidden lg:grid lg:grid-cols-2 h-full">
-                    {/* Left Marquee - Moving Up */}
-                    <Marquee
-                      className="h-full"
-                      pauseOnHover
-                      vertical
-                      repeat={true}
-                    >
-                      {leftTestimonis.map((testimoni, index) => (
-                        <motion.div
-                          key={`${testimoni.nama}-${index}`}
-                          className="bg-white rounded-2xl p-3 shadow-lg hover:shadow-xl transition-all duration-300 mx-0.5 my-1 w-full border border-gray-100 backdrop-blur-sm"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 20 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          {/* Header */}
-                          <div className="flex items-center space-x-2 mb-3">
-                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm">
-                              {testimoni.avatar}
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-gray-800 text-xs">{testimoni.nama}</h4>
-                              <p className="text-xs text-gray-500">{testimoni.tahun}</p>
-                            </div>
-                          </div>
-                          
-                          {/* Testimoni Text */}
-                          <p className="text-gray-600 text-xs leading-relaxed line-clamp-3">
-                            {testimoni.testimoni}
-                          </p>
-                          
-                          {/* Rating Stars */}
-                          <div className="flex items-center mt-2 space-x-1">
-                            {[...Array(5)].map((_, i) => (
-                              <span key={i} className="text-yellow-400 text-xs">⭐</span>
-                            ))}
-                          </div>
-                        </motion.div>
-                      ))}
-                    </Marquee>
-
-                    {/* Right Marquee - Moving Down */}
-                    <Marquee
-                      className="h-full"
-                      pauseOnHover
-                      vertical
-                      reverse
-                      repeat={true}
-                    >
-                      {rightTestimonis.map((testimoni, index) => (
-                        <motion.div
-                          key={`${testimoni.nama}-${index}`}
-                          className="bg-white rounded-2xl p-3 shadow-lg hover:shadow-xl transition-all duration-300 mx-0.5 my-1 w-full border border-gray-100 backdrop-blur-sm"
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -20 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          {/* Header */}
-                          <div className="flex items-center space-x-2 mb-3">
-                            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white text-sm">
-                              {testimoni.avatar}
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-gray-800 text-xs">{testimoni.nama}</h4>
-                              <p className="text-xs text-gray-500">{testimoni.tahun}</p>
-                            </div>
-                          </div>
-                          
-                          {/* Testimoni Text */}
-                          <p className="text-gray-600 text-xs leading-relaxed line-clamp-3">
-                            {testimoni.testimoni}
-                          </p>
-                          
-                          {/* Rating Stars */}
-                          <div className="flex items-center mt-2 space-x-1">
-                            {[...Array(5)].map((_, i) => (
-                              <span key={i} className="text-yellow-400 text-xs">⭐</span>
-                            ))}
-                          </div>
-                        </motion.div>
-                      ))}
-                    </Marquee>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
+        {/* Center Content Overlay - Fixed at top */}
+        <div className="pointer-events-none absolute top-0 left-0 right-0 z-[100] pt-16 pb-32">
+          <div className="pointer-events-auto">
+            <div className="flex flex-col items-center justify-center px-4">
+              <motion.h1 
+                className="text-4xl font-medium tracking-tight text-white md:text-6xl text-center mb-4"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Dipercaya oleh ribuan <br /> orang tua siswa
+              </motion.h1>
+              <motion.p 
+                className="mx-auto max-w-md text-base text-white/80 md:text-lg text-center mb-6"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                Berikut ini adalah testimoni orang tua siswa kami untuk mendidik putra-putri tercinta.
+              </motion.p>
             </div>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   )

@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals-clean.css";
 import Footer from '../components/Footer';
 import LiveChatBanner from '../components/LiveChatBanner';
-import BackgroundMusic from '../components/BackgroundMusic';
 import SmoothScroll from '../components/SmoothScroll';
 import { i18n } from '@/lib/i18n';
 
@@ -35,7 +34,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <LiveChatBanner />
-        <BackgroundMusic />
       </body>
     </html>
   );
