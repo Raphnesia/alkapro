@@ -6,7 +6,7 @@ interface Facility {
   id: number;
   name: string;
   slug: string;
-  image: string;
+  image: string | null;
   description?: string;
 }
 
